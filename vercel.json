@@ -3,5 +3,11 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/download/:path*",
+      "destination": "https://649ogrnzpi9dgfiw.public.blob.vercel-storage.com/:path*"
+    }
+  ]
 }
