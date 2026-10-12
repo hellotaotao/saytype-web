@@ -2,7 +2,9 @@ import { describe, expect, it } from 'vitest'
 import {
   detectDownloadPlatform,
   getFallbackDownloadUrl,
+  isMainlandChinaTimeZone,
   latestReleaseApiUrl,
+  mirrorIndexUrl,
   releasePageUrl,
   resolveLatestDownloadUrl,
   selectReleaseAsset,
@@ -110,4 +112,74 @@ describe('release asset selection', () => {
       getFallbackDownloadUrl('macos'),
     )
   })
+})
+
+describe('mainland China mirror', () => {
+  const mirrorIndex = {
+    tag: 'v1.19.2',
+    paths: [
+      'releases/v1.19.2/SayType_1.19.2_universal.dmg',
+      'releases/v1.19.2/SayType_1.19.2_x64-setup.exe',
+      'releases/v1.19.2/SayType_1.19.2_x64_en-US.msi',
+      'releases/v1.19.2/SayType_universal.app.tar.gz',
+    ],
+  }
+  const serve = (calls: string[], mirror: unknown, github: unknown) => async (url: string) => {
+    calls.push(url)
+    const body = url === mirrorIndexUrl ? mirror : github
+    return { ok: body !== undefined, json: async () => body }
+  }
+
+  it('recognises mainland time zones only', () => {
+    for (const timeZone of ['Asia/Shanghai', 'Asia/Urumqi', 'PRC']) {
+      expect(isMainlandChinaTimeZone(timeZone)).toBe(true)
+    }
+    for (const timeZone of ['Asia/Hong_Kong', 'Asia/Taipei', 'Australia/Adelaide', 'UTC', undefined]) {
+      expect(isMainlandChinaTimeZone(timeZone)).toBe(false)
+    }
+  })
+
+  it('serves mainland visitors from the mirror without asking GitHub', async () => {
+    const calls: string[] = []
+    const fetchRelease = serve(calls, mirrorIndex, { assets: releaseAssets })
+
+    await expect(resolveLatestDownloadUrl('macos', fetchRelease, 'Asia/Shanghai')).resolves.toBe(
+      '/download/releases/v1.19.2/SayType_1.19.2_universal.dmg',
+    )
+    await expect(resolveLatestDownloadUrl('windows', fetchRelease, 'Asia/Shanghai')).resolves.toBe(
+      '/download/releases/v1.19.2/SayType_1.19.2_x64-setup.exe',
+    )
+    expect(calls).toEqual([mirrorIndexUrl, mirrorIndexUrl])
+  })
+
+  it('sends mainland visitors to GitHub for what the mirror lacks', async () => {
+    const calls: string[] = []
+    const fetchRelease = serve(calls, mirrorIndex, { assets: releaseAssets })
+
+    await expect(resolveLatestDownloadUrl('linux', fetchRelease, 'Asia/Shanghai')).resolves.toBe('https://example.com/linux')
+    expect(calls).toEqual([mirrorIndexUrl, latestReleaseApiUrl])
+
+    await expect(
+      resolveLatestDownloadUrl('macos', serve([], undefined, { assets: releaseAssets }), 'Asia/Shanghai'),
+    ).resolves.toBe('https://example.com/macos')
+  })
+
+  it('keeps GitHub first elsewhere and uses the mirror when GitHub fails', async () => {
+    const calls: string[] = []
+    await expect(
+      resolveLatestDownloadUrl('macos', serve(calls, mirrorIndex, { assets: releaseAssets }), 'Australia/Adelaide'),
+    ).resolves.toBe('https://example.com/macos')
+    expect(calls).toEqual([latestReleaseApiUrl])
+
+    await expect(resolveLatestDownloadUrl('macos', serve([], mirrorIndex, undefined), 'Australia/Adelaide')).resolves.toBe(
+      '/download/releases/v1.19.2/SayType_1.19.2_universal.dmg',
+    )
+  })
+
+  it.each([null, {}, { paths: 'x' }, { paths: [7, '../evil.dmg', 'runtime/x.dmg'] }])(
+    'ignores a malformed mirror index',
+    async (index) => {
+      await expect(resolveLatestDownloadUrl('macos', serve([], index, undefined), 'Asia/Shanghai')).resolves.toBe(releasePageUrl)
+    },
+  )
 })
