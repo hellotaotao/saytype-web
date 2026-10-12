@@ -4,7 +4,7 @@ Product marketing homepage for SayType, a Tauri desktop voice input app. macOS i
 
 ## Product message
 
-The homepage leads with local transcription, no account and no subscription. Both languages and preview layouts present local benefits before the short workflow; optional cloud features are disclosed below the primary pitch. Download prerequisites appear before the final download action. These claims apply to local transcription, not optional cloud services.
+The homepage leads with local transcription, no account and no subscription. Both languages present local benefits before the short workflow; optional cloud features are disclosed below the primary pitch. Download prerequisites appear before the final download action. These claims apply to local transcription, not optional cloud services.
 
 Hold `Ctrl+Shift`, speak, release: SayType transcribes with the configured engine and inserts text at the cursor. `Escape` cancels. Local Qwen3 transcription needs no account or API key after the model download. Optional Groq/OpenAI transcription and English translation upload audio to the configured provider using the user's own key; provider charges may apply.
 
@@ -17,15 +17,6 @@ Copy is checked against `../SayType` at tag `v1.15.2`, especially `README.md`, `
 - Hold `Shift+Alt` for English cloud translation. Local-mode translation setup asks for consent.
 - Updates download in the background; the user chooses when to restart.
 - Microphone and macOS Accessibility permissions are required for the complete macOS workflow.
-
-## Layouts and preview
-
-The default `/` (English) and `/zh` (Simplified Chinese) use the selected editorial layout. Explicit preview links expose a small layout switcher:
-
-- `/?preview=editorial` — first design, also the production default.
-- `/?preview=stage` — second design, centered product stage.
-
-Unknown or missing preview parameters always use the default without preview controls. Exit preview returns to the current language homepage. Both layouts share the current product copy, real screenshots, lower sections and download behavior. There is **no A/B experiment, analytics SDK, event collection, random assignment, cookie or localStorage persistence**. Each preview uses the corresponding language homepage as its canonical URL.
 
 ## Languages
 
@@ -44,11 +35,10 @@ Every scene rests on a complete static frame when `prefers-reduced-motion` is se
 
 ## Implementation
 
-- React, Vite and TypeScript; no additional runtime dependency for preview or motion.
+- React, Vite and TypeScript; no additional runtime dependency for motion.
 - `src/content/productMessaging.ts` holds the structured English product copy; `src/content/homeCopy.ts` holds its Chinese translations.
-- `src/preview.ts` only parses explicit preview parameters.
-- `src/motion.ts` scopes animation lifecycle to the page. CSS hero entrance and one-time section reveals use transform/opacity; only decorative wave art responds to mouse movement, by at most 10px horizontally and 7px vertically. No continuously moving app window or animation loop.
-- Reduced motion disables entrance, parallax, reveals, transitions and smooth scrolling. No hidden-by-default reveal content. Observers, animations, frame requests and listeners are cleaned up.
+- `src/motion.ts` runs the one-time section reveals and scopes their lifecycle to the page. The hero entrance is CSS; both use transform/opacity only. The looping product scenes live in `DictationDemo.css` and `Illustrations.css`.
+- Reduced motion disables entrance, reveals, scene loops, transitions and smooth scrolling. No hidden-by-default reveal content. Observers, animations, frame requests and listeners are cleaned up.
 - Downloads resolve current GitHub assets on a normal click. Modified clicks, metadata errors or missing assets open the latest release page instead of a pinned obsolete installer.
 
 ## Development and validation
@@ -62,7 +52,7 @@ npm run build
 npm run preview -- --host 127.0.0.1 --port 4175
 ```
 
-Preview both layouts at 320, 390, 768, 1100, 1280 and 1440px. Check anchor navigation, the preview switcher, model disclosure, full-size screenshot links, download fallback, reduced motion, console/network errors and overflow. Production output is `dist/`. Deployments are separate from local validation.
+Check the page at 320, 390, 768, 1100, 1280 and 1440px: anchor navigation, model disclosure, per-platform download links, download fallback, reduced motion, console/network errors and overflow. Production output is `dist/`. Deployments are separate from local validation.
 
 ## Product updates and release history
 

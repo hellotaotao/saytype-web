@@ -54,19 +54,17 @@ describe('bilingual browser entry', () => {
     expect(page.props.page).toBe(logicalPage)
     expect(document.documentElement.lang).toBe('zh-CN')
   })
-  it('hydrates the normal English homepage with deterministic layout props', async () => {
+  it('hydrates the normal English homepage', async () => {
     await mount('/', true)
     const page = hydrateRoot.mock.calls[0][1].props.children
     expect(page.props.locale).toBe('en')
-    expect(page.props.preview).toBeNull()
   })
-  it.each(['stage', 'editorial'])('replaces homepage markup only for the explicit %s layout preview', async (layout) => {
-    await mount('/zh', true, `?preview=${layout}`)
-    expect(hydrateRoot).not.toHaveBeenCalled()
-    expect(render.mock.calls[0][0].props.children.props.preview).toBe(layout)
-    expect(render.mock.calls[0][0].props.children.props.locale).toBe('zh')
+  it('hydrates the homepage even with an unknown query string', async () => {
+    await mount('/zh', true, '?preview=stage')
+    expect(hydrateRoot).toHaveBeenCalledOnce()
+    expect(createRoot).not.toHaveBeenCalled()
   })
-  it('does not let homepage preview parameters disable hydration on an update page', async () => {
+  it('ignores query strings on an update page', async () => {
     await mount('/zh/updates', true, '?preview=stage')
     expect(hydrateRoot).toHaveBeenCalledOnce()
   })

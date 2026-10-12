@@ -50,12 +50,10 @@ function fixture(reduce = false) {
 afterEach(() => { vi.unstubAllGlobals() })
 
 describe('scoped page motion', () => {
-  it('does not set up animations or pointer motion with reduced motion enabled', () => {
+  it('does not set up animations with reduced motion enabled', () => {
     const f = fixture(true)
     const cleanup = setupPageMotion(f.root)
     expect(f.createObserver).not.toHaveBeenCalled()
-    f.move()
-    expect(f.raf).not.toHaveBeenCalled()
     cleanup()
   })
 
@@ -73,45 +71,22 @@ describe('scoped page motion', () => {
     expect(f.disconnect).toHaveBeenCalledOnce()
   })
 
-  it('bounds mouse parallax and excludes touch and hidden documents', () => {
-    const f = fixture()
-    const cleanup = setupPageMotion(f.root)
-    f.move('touch')
-    expect(f.raf).not.toHaveBeenCalled()
-    f.move()
-    f.frame()
-    expect(f.style.setProperty).toHaveBeenCalledWith('--wave-x', '10px')
-    expect(f.style.setProperty).toHaveBeenCalledWith('--wave-y', '7px')
-    f.doc.hidden = true
-    f.move()
-    expect(f.raf).toHaveBeenCalledOnce()
-    f.doc.dispatchEvent(new Event('visibilitychange'))
-    expect(f.style.removeProperty).toHaveBeenCalledWith('--wave-x')
-    cleanup()
-  })
-
   it('cancels active work when reduced motion changes and removes listeners on teardown', () => {
     const f = fixture()
     const cleanup = setupPageMotion(f.root)
     f.intersect(true)
-    f.move()
     f.reduced.set(true)
     expect(f.animation.cancel).toHaveBeenCalledOnce()
-    f.frame()
-    expect(f.style.setProperty).not.toHaveBeenCalledWith('--wave-x', expect.anything())
-    f.move()
-    expect(f.raf).toHaveBeenCalledOnce()
     cleanup()
     const observerCount = f.createObserver.mock.calls.length
     f.reduced.set(false)
     expect(f.createObserver).toHaveBeenCalledTimes(observerCount)
   })
 
-  it('does not replay sections after pointer or motion preferences change', () => {
+  it('does not replay sections after motion preferences change', () => {
     const f = fixture()
     const cleanup = setupPageMotion(f.root)
     f.intersect(true)
-    f.fine.set(false)
     f.reduced.set(true)
     f.reduced.set(false)
     expect(f.observe).toHaveBeenCalledOnce()
@@ -126,47 +101,7 @@ describe('scoped page motion', () => {
     cleanup()
   })
 
-  it('scrolls decorative art and the screenshot at different bounded speeds', () => {
-    const f = fixture()
-    const cleanup = setupPageMotion(f.root)
-    f.bounds.top = -50
-    f.bounds.bottom = 50
-    f.win.dispatchEvent(new Event('scroll'))
-    f.win.dispatchEvent(new Event('scroll'))
-    expect(f.raf).toHaveBeenCalledOnce()
-    f.frame()
-    expect(f.style.setProperty).toHaveBeenCalledWith('--wave-scroll', '15px')
-    expect(f.style.setProperty).toHaveBeenCalledWith('--product-scroll', '4px')
-    f.bounds.top = -100
-    f.bounds.bottom = 0
-    f.win.dispatchEvent(new Event('scroll'))
-    f.frame()
-    expect(f.style.setProperty).toHaveBeenCalledWith('--wave-scroll', '30px')
-    expect(f.style.setProperty).toHaveBeenCalledWith('--product-scroll', '8px')
-    cleanup()
-    expect(f.style.removeProperty).toHaveBeenCalledWith('--product-scroll')
-  })
-
-  it('skips offscreen writes and hidden work, and releases scroll listeners', () => {
-    const f = fixture()
-    const cleanup = setupPageMotion(f.root)
-    f.style.setProperty.mockClear()
-    f.bounds.top = -200
-    f.bounds.bottom = -100
-    f.win.dispatchEvent(new Event('scroll'))
-    f.frame()
-    expect(f.style.setProperty).not.toHaveBeenCalled()
-    f.doc.hidden = true
-    f.win.dispatchEvent(new Event('scroll'))
-    expect(f.raf).toHaveBeenCalledOnce()
-    cleanup()
-    f.doc.hidden = false
-    f.win.dispatchEvent(new Event('scroll'))
-    f.win.dispatchEvent(new Event('resize'))
-    expect(f.raf).toHaveBeenCalledOnce()
-  })
-
-  it('uses only fades on small screens and does not install parallax', () => {
+  it('uses only fades on small screens', () => {
     const f = fixture()
     f.wide.matches = false
     const cleanup = setupPageMotion(f.root)
@@ -174,9 +109,6 @@ describe('scoped page motion', () => {
     expect(f.target.animate).toHaveBeenCalledWith(
       [{ opacity: 0 }, { opacity: 1 }], expect.objectContaining({ delay: 0 }),
     )
-    f.move()
-    f.win.dispatchEvent(new Event('scroll'))
-    expect(f.raf).not.toHaveBeenCalled()
     cleanup()
   })
 

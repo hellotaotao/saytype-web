@@ -46,22 +46,10 @@ describe('SayType launch page', () => {
     expect(product).not.toContain('saytype-app-settings.png')
   })
 
-  it('defaults to editorial without preview controls or experiment state', () => {
+  it('has no layout preview controls', () => {
     const html = renderToStaticMarkup(<App />)
-    expect(html).toContain('data-layout="editorial"')
-    expect(html).not.toContain('Layout preview')
-  })
-
-  it('renders the centered alternative only when explicitly requested', () => {
-    const html = renderToStaticMarkup(<App preview="stage" />)
-    expect(html).toContain('data-layout="stage"')
-    expect(html).toContain('Local transcription.')
-    expect(html).toContain('src="/saytype-home-hero.webp"')
-    expect(html).toContain('No subscription.')
-    expect(html).toContain('Layout preview')
-    expect(html).toContain('href="?preview=editorial#top"')
-    expect(html).toContain('href="?preview=stage#top"')
-    expect(html).toContain('aria-current="page"')
+    expect(html).not.toContain('preview-toolbar')
+    expect(html).not.toContain('?preview=')
   })
 
   it('keeps navigation and download actions accessible', () => {
@@ -130,7 +118,7 @@ describe('localized launch page', () => {
   afterEach(() => { vi.unstubAllGlobals() })
 
   it('translates every section and navigation into Chinese', () => {
-    const html = renderToStaticMarkup(<App locale="zh" preview={null} />)
+    const html = renderToStaticMarkup(<App locale="zh" />)
     for (const text of ['跳到正文', '按住，说话，松开。', '随时待命，不打扰工作。', '你的话，留在你的设备上。', '适配你的桌面平台。', '主要测试平台', 'Windows', 'Linux', '本地转写，无需云端。', '产品更新', '本地模式无需注册或 API key', '重构这个函数，保留原来的 error handling。']) {
       expect(html).toContain(text)
     }
@@ -144,18 +132,16 @@ describe('localized launch page', () => {
     expect(html).not.toMatch(/(?:src|href)="\.\//)
   })
 
-  it('localizes preview controls and illustrations', () => {
-    const html = renderToStaticMarkup(<App locale="zh" preview="stage" />)
-    expect(html).toContain('布局预览')
-    expect(html).toContain('退出预览')
+  it('localizes the drawn illustrations', () => {
+    const html = renderToStaticMarkup(<App locale="zh" />)
     expect(html).toContain('马上到，十分钟！')
   })
 
   it('keeps the initial download markup deterministic across visitor platforms', () => {
-    const baseline = renderToStaticMarkup(<App preview={null} />)
+    const baseline = renderToStaticMarkup(<App />)
     for (const platform of ['Win32', 'Linux x86_64']) {
       vi.stubGlobal('navigator', { platform, userAgent: platform })
-      expect(renderToStaticMarkup(<App preview={null} />)).toBe(baseline)
+      expect(renderToStaticMarkup(<App />)).toBe(baseline)
     }
   })
 })

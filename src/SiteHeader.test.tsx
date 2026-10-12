@@ -9,7 +9,7 @@ const withoutCurrent = (html: string) => html.replace(/ aria-current="(?:page|tr
 describe('shared site navigation', () => {
   for (const locale of ['en', 'zh'] as const) {
     it(`keeps the same header, navigation and action order on every ${locale} page`, () => {
-      const home = header(renderToStaticMarkup(<App locale={locale} preview={null} />))
+      const home = header(renderToStaticMarkup(<App locale={locale} />))
       const updates = header(renderToStaticMarkup(<UpdatesPage locale={locale} page="updates" />))
       const changelog = header(renderToStaticMarkup(<UpdatesPage locale={locale} page="changelog" />))
       const normalize = (html: string) => withoutCurrent(html).replace(/href="\/(?:zh\/?)?(?:updates|changelog)?" hrefLang=/g, 'href="locale-page" hrefLang=')

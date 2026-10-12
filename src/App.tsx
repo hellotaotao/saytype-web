@@ -1,7 +1,6 @@
 import './App.css'
 import './updates/UpdatesPage.css'
 import { useEffect, useRef } from 'react'
-import { getPreviewLayout, type PreviewLayout } from './preview'
 import { setupPageMotion } from './motion'
 import { homeCopy } from './content/homeCopy'
 import { localizedPath, type Locale } from './i18n'
@@ -47,21 +46,20 @@ const downloadRequirements = [
   'Microphone required · Accessibility permission on macOS',
 ] as const
 
-function App({ locale = 'en', preview = getPreviewLayout(typeof window === 'undefined' ? '' : window.location.search) }: { locale?: Locale; preview?: PreviewLayout | null }) {
+function App({ locale = 'en' }: { locale?: Locale }) {
   const t = homeCopy(locale)
   const root = useRef<HTMLDivElement>(null)
-  const layout = preview ?? 'editorial'
 
   useEffect(() => {
     if (root.current) return setupPageMotion(root.current)
-  }, [layout])
+  }, [])
 
   return (
-    <div className="site-shell" data-layout={layout} lang={locale === 'zh' ? 'zh-CN' : 'en'} ref={root}>
+    <div className="site-shell" data-layout="editorial" lang={locale === 'zh' ? 'zh-CN' : 'en'} ref={root}>
       <a className="skip-link" href="#main">{t('Skip to content')}</a>
       <SiteHeader locale={locale} page="home" />
       <main id="main" tabIndex={-1}>
-        <HeroSection locale={locale} layout={layout} />
+        <HeroSection locale={locale} />
         <PrivacySection locale={locale} />
         <WorkflowSection locale={locale} />
         <ProductSection locale={locale} />
@@ -69,19 +67,11 @@ function App({ locale = 'en', preview = getPreviewLayout(typeof window === 'unde
         <DownloadSection locale={locale} />
       </main>
       <SiteFooter locale={locale} />
-      {preview && (
-        <aside className="preview-toolbar" aria-label={t('Layout preview')}>
-          <span>{t('Layout preview')}</span>
-          <a href="?preview=editorial#top" aria-current={layout === 'editorial' ? 'page' : undefined}>{t('1 · Editorial')}</a>
-          <a href="?preview=stage#top" aria-current={layout === 'stage' ? 'page' : undefined}>{t('2 · Product stage')}</a>
-          <a href="?" aria-label={t('Exit layout preview')}>{t('Exit preview')}</a>
-        </aside>
-      )}
     </div>
   )
 }
 
-function HeroSection({ locale }: { locale: Locale; layout: PreviewLayout }) {
+function HeroSection({ locale }: { locale: Locale }) {
   const t = homeCopy(locale)
 
   return (
