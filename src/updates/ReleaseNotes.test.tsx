@@ -16,6 +16,13 @@ describe('ReleaseNotes', () => {
     expect(html).toContain('href="https://example.com/notes"')
   })
 
+  it('shows the current product name in prose but keeps file names as published', () => {
+    const html = render('- SayType now checks for updates. **SayType** `SayType_1.13.4_universal.dmg`')
+    expect(html).toContain('TypeAloud now checks for updates.')
+    expect(html).toContain('<strong>TypeAloud</strong>')
+    expect(html).toContain('<code>SayType_1.13.4_universal.dmg</code>')
+  })
+
   it('escapes source HTML and angle-bracket placeholders, and rejects unsafe links', () => {
     const html = render('<script>alert(1)</script>\n\nUse <model> now. [Bad](javascript:alert(1)) ![track](https://example.com/pixel)')
     expect(html).not.toContain('<script>')
