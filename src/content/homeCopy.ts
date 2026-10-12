@@ -2,7 +2,12 @@ import type { Locale } from '../i18n'
 
 const chinese = {
   'Voice to text, right where you work.': '随时开口，文字就在你手边。',
-  'Local transcription.': '本地转写。',
+  'Local transcription.': '本地语音转写。',
+  'Speak naturally.': '自然说，',
+  'Mix languages.': '混着说。',
+  'Download for free': '免费下载',
+  'No account · No subscription · Works offline after model download': '无需账号 · 无需订阅 · 下载模型后即可离线使用',
+  'Turn your voice into text on your device, right in the app you’re using—even when you mix languages.': '在你的设备上，把语音转成当前应用里的文字。一句话里混用多种语言，也能按自己的习惯表达。',
   'No account.': '无需账号。',
   'No subscription.': '无需订阅。',
   'Download a model. Transcribe offline.': '下载模型，即可离线转写。',
@@ -125,7 +130,7 @@ const chinese = {
   'GitHub releases ↗': 'GitHub 发布记录 ↗',
 }
 
-type HomeCopyKey = keyof typeof chinese
+export type HomeCopyKey = keyof typeof chinese
 
 export function homeCopy(locale: Locale) {
   return (key: HomeCopyKey): string => locale === 'zh' ? chinese[key] : key

@@ -1,0 +1,99 @@
+/* Looping product demo drawn in CSS. Every length inside .dd-stage is in em,
+   and 1em is 1/64 of the demo's width, so the whole scene scales as one image.
+   Without animation (reduced motion, or no CSS animation support) the scene
+   rests on a composite frame: keys held, prompt up, text already inserted. */
+.dictation-demo { container-type: inline-size; width: 100%; perspective: 1700px; perspective-origin: 30% 40%; }
+.dd-stage { font-size: calc(100cqw / 64); transform: rotateY(-17deg) rotateX(6deg) rotateZ(1.2deg); transform-origin: 60% 50%; transform-style: preserve-3d; }
+.dd-screen { position: relative; height: 40em; border: 0.5em solid #10191b; border-radius: 1.4em; background: radial-gradient(120% 90% at 15% 0%, #9fdcdc 0%, transparent 55%), radial-gradient(90% 80% at 100% 100%, #ffb59c 0%, transparent 60%), linear-gradient(140deg, #0c4a58, #073541); box-shadow: 0 0 0 0.12em #2c3a3d, 2.6em 3.4em 6em rgba(7, 20, 27, 0.32), 0.6em 0.8em 1.6em rgba(7, 20, 27, 0.2); transform-style: preserve-3d; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; letter-spacing: 0; text-align: left; }
+
+.dd-screen::before { content: ''; position: absolute; z-index: 1; top: 0; left: 50%; width: 10em; height: 1.7em; margin-left: -5em; border-radius: 0 0 0.7em 0.7em; background: #10191b; }
+.dd-menubar { display: flex; align-items: center; gap: 1.6em; height: 2.4em; padding: 0 1.4em; border-radius: 0.85em 0.85em 0 0; background: rgba(255, 255, 255, 0.2); color: #fff; }
+.dd-menubar strong, .dd-menubar span { font-size: 1.05em; }
+.dd-menubar span { opacity: 0.86; }
+.dd-menubar img { width: 1.5em; height: 1.5em; margin-left: auto; border-radius: 0.35em; }
+.dd-menubar .dd-apple { width: 1.2em; height: 1.25em; margin: 0 -0.3em 0 0; border-radius: 0; }
+.dd-menubar time { font-size: 1.05em; opacity: 0.9; }
+
+.dd-window { position: absolute; top: 4.6em; left: 4em; right: 4em; bottom: 3.4em; display: flex; flex-direction: column; border-radius: 1em; background: #fdfcf9; box-shadow: 0 1.6em 3.4em rgba(3, 26, 33, 0.42); transform: translateZ(2.2em); overflow: hidden; }
+.dd-titlebar { display: flex; align-items: center; gap: 0.6em; height: 3em; padding: 0 1.2em; border-bottom: 1px solid rgba(7, 20, 27, 0.08); background: #f3efe8; }
+.dd-titlebar i { width: 0.95em; height: 0.95em; border-radius: 50%; background: #ff5f57; }
+.dd-titlebar i:nth-child(2) { background: #febc2e; }
+.dd-titlebar i:nth-child(3) { background: #28c840; }
+.dd-titlebar span { margin-left: 1em; color: #5d686c; font-size: 1.05em; font-weight: 600; }
+.dd-doc { padding: 2.2em 3em; color: #1c2a2e; }
+.dd-doc p { margin: 0 0 0.75em; font-size: 1.5em; line-height: 1.55; }
+.dd-doc .dd-doc-title { margin-bottom: 0.5em; color: #07141b; font-size: 2.3em; font-weight: 800; letter-spacing: -0.03em; line-height: 1.2; }
+.dd-inserted { border-radius: 0.2em; }
+.dd-caret { display: inline-block; width: 0.12em; height: 1.15em; margin: 0 0.06em; background: #ff7a5c; vertical-align: -0.2em; }
+.dd-caret-before { display: none; }
+
+.dd-prompt-layer { position: absolute; left: 50%; top: 22.4em; width: 34em; margin-left: -17em; transform: translateZ(7em); }
+.dd-prompt { display: flex; align-items: center; gap: 1.3em; height: 8.4em; padding: 0 1.9em; border-radius: 1.5em; background: linear-gradient(135deg, rgba(33, 46, 43, 0.97), rgba(20, 28, 27, 0.97)); box-shadow: 0 0 2.8em rgba(123, 193, 175, 0.32), 0 0.8em 1.9em rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(123, 193, 175, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.12); }
+.dd-mic { flex: none; width: 2.3em; height: 2.3em; fill: #7bc1af; filter: drop-shadow(0 0 0.6em rgba(123, 193, 175, 0.6)); }
+.dd-prompt-text { display: flex; flex: 1; flex-direction: column; gap: 0.15em; min-width: 0; }
+.dd-prompt-title { display: grid; color: rgba(241, 238, 231, 0.9); font-size: 1.32em; font-weight: 500; line-height: 1.25; }
+.dd-prompt-title span { grid-area: 1 / 1; white-space: nowrap; }
+.dd-transcribing { opacity: 0; }
+.dd-prompt-status { display: flex; align-items: center; color: rgba(241, 238, 231, 0.6); font-size: 1.04em; white-space: nowrap; }
+.dd-prompt-status i { width: 0.85em; height: 0.85em; margin-left: 0.7em; border-radius: 50%; background: #f0a93a; box-shadow: 0 0 0.8em rgba(240, 169, 58, 0.7); }
+.dd-prompt-model { color: rgba(241, 238, 231, 0.42); font-size: 0.94em; font-weight: 500; white-space: nowrap; }
+.dd-wave { display: flex; flex: none; align-items: center; gap: 0.19em; height: 3.6em; }
+.dd-wave i { width: 0.28em; height: 100%; border-radius: 0.2em; background: linear-gradient(to top, #7bc1af, #a9e2d1); box-shadow: 0 0 0.6em rgba(123, 193, 175, 0.4); transform: scaleY(0.5); }
+.dd-wave i:nth-child(3n) { transform: scaleY(0.85); }
+.dd-wave i:nth-child(4n + 1) { transform: scaleY(0.28); }
+.dd-wave i:nth-child(5n + 2) { transform: scaleY(0.68); }
+.dd-bubble { margin-top: 0.75em; padding: 0.6em 1.3em; border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 1.1em; background: linear-gradient(135deg, rgba(26, 33, 32, 0.98), rgba(15, 20, 19, 0.98)); box-shadow: 0 1.1em 2.4em rgba(0, 0, 0, 0.44); color: #f1eee7; font-size: 1.22em; font-weight: 500; line-height: 1.45; text-align: center; }
+
+.dd-keys { position: absolute; left: -2.6em; bottom: -2.4em; display: flex; align-items: center; gap: 0.7em; transform: translateZ(9em); }
+.dd-keys kbd { min-width: 4.2em; padding: 0.75em 1em; border-radius: 0.7em; background: #ffd9cd; box-shadow: 0 0.12em 0 #e2a999, 0 0.5em 1.2em rgba(7, 20, 27, 0.2); color: #7a3524; font: 800 1.35em/1 Arial, sans-serif; text-align: center; transform: translateY(0.22em); }
+.dd-keys span { color: #b4472f; font-size: 1.5em; font-weight: 800; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .dd-prompt-layer { animation: dd-prompt 10s linear infinite; }
+  .dd-listening { animation: dd-listening 10s linear infinite; }
+  .dd-transcribing { animation: dd-transcribing 10s linear infinite; }
+  .dd-prompt-status { animation: dd-listening 10s linear infinite; }
+  .dd-prompt-status i { animation: dd-pulse 1.2s ease-in-out infinite; }
+  .dd-wave { animation: dd-wave-level 10s linear infinite; }
+  .dd-wave i { animation: dd-wave-bar 0.9s ease-in-out infinite alternate; }
+  .dd-wave i:nth-child(2n) { animation-duration: 0.62s; animation-delay: -0.3s; }
+  .dd-wave i:nth-child(3n) { animation-duration: 0.78s; animation-delay: -0.55s; }
+  .dd-wave i:nth-child(5n) { animation-duration: 1.1s; animation-delay: -0.8s; }
+  .dd-wave i:nth-child(7n) { animation-duration: 0.5s; animation-delay: -0.15s; }
+  .dd-bubble { animation: dd-bubble 10s linear infinite; }
+  .dd-inserted { animation: dd-inserted 10s linear infinite; }
+  .dd-caret { background: none; animation: dd-caret-blink 1.05s steps(1) infinite; }
+  .dd-caret::before { content: ''; display: block; width: 100%; height: 100%; background: #ff7a5c; }
+  .dd-caret-before { display: inline-block; }
+  .dd-caret-before::before { animation: dd-caret-before 10s steps(1) infinite; }
+  .dd-caret-after::before { animation: dd-caret-after 10s steps(1) infinite; }
+  .dd-keys kbd { animation: dd-key 10s linear infinite; }
+}
+
+/* Timeline of the 10s loop: keys go down at 8%, come up at 46%, the transcript
+   bubble shows from 52%, and the text lands in the document at 62%. */
+@keyframes dd-prompt {
+  0%, 7% { opacity: 0; transform: translateZ(7em) translateY(1.6em) scale(0.94); }
+  11%, 62% { opacity: 1; transform: translateZ(7em) translateY(0) scale(1); }
+  66%, 100% { opacity: 0; transform: translateZ(7em) translateY(0.8em) scale(0.97); }
+}
+@keyframes dd-key {
+  0%, 7.5% { transform: translateY(0); background: #fff; box-shadow: 0 0.34em 0 #e2a999, 0 0.7em 1.4em rgba(7, 20, 27, 0.22); }
+  8.5%, 45.5% { transform: translateY(0.22em); background: #ffd9cd; box-shadow: 0 0.12em 0 #e2a999, 0 0.5em 1.2em rgba(7, 20, 27, 0.2); }
+  46.5%, 100% { transform: translateY(0); background: #fff; box-shadow: 0 0.34em 0 #e2a999, 0 0.7em 1.4em rgba(7, 20, 27, 0.22); }
+}
+@keyframes dd-listening { 0%, 46% { opacity: 1; } 47.5%, 100% { opacity: 0; } }
+@keyframes dd-transcribing { 0%, 46% { opacity: 0; } 47.5%, 100% { opacity: 1; } }
+@keyframes dd-wave-level { 0%, 9% { transform: scaleY(0.12); } 12%, 46% { transform: scaleY(1); } 48.5%, 100% { transform: scaleY(0.12); } }
+@keyframes dd-wave-bar { from { transform: scaleY(0.26); } to { transform: scaleY(1); } }
+@keyframes dd-pulse { 50% { opacity: 0.6; transform: scale(1.2); } }
+@keyframes dd-bubble { 0%, 51% { opacity: 0; transform: translateY(-0.5em); } 54%, 100% { opacity: 1; transform: translateY(0); } }
+@keyframes dd-inserted {
+  0%, 62% { opacity: 0; background: transparent; }
+  63.5% { opacity: 1; background: rgba(20, 188, 215, 0.3); }
+  72%, 95% { opacity: 1; background: transparent; }
+  99%, 100% { opacity: 0; background: transparent; }
+}
+@keyframes dd-caret-blink { 50% { opacity: 0; } }
+@keyframes dd-caret-before { 0% { opacity: 1; } 62.5% { opacity: 0; } 99% { opacity: 1; } }
+@keyframes dd-caret-after { 0% { opacity: 0; } 62.5% { opacity: 1; } 99% { opacity: 0; } }

@@ -7,6 +7,8 @@ import { homeCopy } from './content/homeCopy'
 import { localizedPath, type Locale } from './i18n'
 import SiteHeader from './SiteHeader'
 import DownloadButton from './DownloadButton'
+import DictationDemo from './DictationDemo'
+import { AppsScene, BenefitIcon, StepScene } from './Illustrations'
 import { releasePageUrl } from './downloads'
 const workflowSteps = [
   {
@@ -88,28 +90,22 @@ function HeroSection({ locale }: { locale: Locale; layout: PreviewLayout }) {
           <p className="hero-eyebrow">{t('Voice to text, right where you work.')}</p>
           <h1 id="hero-title">
             <span>{t('Local transcription.')}</span>
-            <span>{t('No account.')}</span>
-            <span>{t('No subscription.')}</span>
+            <span>{t('Speak naturally.')}</span>
+            <span>{t('Mix languages.')}</span>
           </h1>
-          <p className="hero-description">{t('Download a model. Transcribe offline.')}</p>
+          <p className="hero-description">{t('Turn your voice into text on your device, right in the app you’re using—even when you mix languages.')}</p>
           <div className="hero-actions">
-            <DownloadButton locale={locale} />
+            <DownloadButton locale={locale} label="Download for free" />
             <a className="text-link" href="#workflow">{t('See how it works')}</a>
           </div>
+          <p className="hero-tagline">{t('No account · No subscription · Works offline after model download')}</p>
           <p className="hero-tagline">{t('Optional cloud transcription · Bring your own API key.')}</p>
         </div>
         <div className="hero-illustration-wrap" aria-hidden="true">
           <img className="hero-illustration" src="/saytype-home-hero.webp" alt="" width="1904" height="826" />
         </div>
         <figure className="hero-product-peek">
-          <a href="/saytype-settings.png" target="_blank" rel="noreferrer" aria-label={t('View full-size SayType Dictation Settings screenshot')}>
-            <img
-              src="/saytype-settings.png"
-              alt={t('SayType main window showing Dictation Settings and available transcription engines')}
-              width="1152"
-              height="768"
-            />
-          </a>
+          <DictationDemo locale={locale} />
         </figure>
       </div>
       <div className="hero-color-band" aria-hidden="true"><span /><span /><span /></div>
@@ -117,23 +113,10 @@ function HeroSection({ locale }: { locale: Locale; layout: PreviewLayout }) {
   )
 }
 
-function StepIllustration({ number }: { number: string }) {
-  if (number === '01') return (
-    <div className="step-illustration step-keyboard" aria-hidden="true">
-      <span className="keycap">Ctrl</span><span className="key-plus">+</span><span className="keycap keycap-shift">Shift</span>
-    </div>
-  )
-  if (number === '02') return (
-    <div className="step-illustration step-wave" aria-hidden="true">
-      <svg viewBox="0 0 260 104"><path d="M8 52h28l12-34 18 67 20-48 18 25 18-52 18 76 20-49 16 21 18-37 15 31h33" /></svg>
-      <span>{'●'.repeat(3)}</span>
-    </div>
-  )
-  return (
-    <div className="step-illustration step-text" aria-hidden="true">
-      <span className="step-text-line step-text-line-long" /><span className="step-text-line" /><span className="step-caret" />
-    </div>
-  )
+function StepIllustration({ number, locale }: { number: string; locale: Locale }) {
+  if (number === '01') return <div className="step-illustration step-keyboard" aria-hidden="true"><StepScene step="hold" locale={locale} /></div>
+  if (number === '02') return <div className="step-illustration step-wave" aria-hidden="true"><StepScene step="speak" locale={locale} /></div>
+  return <div className="step-illustration step-text" aria-hidden="true"><StepScene step="release" locale={locale} /></div>
 }
 
 function WorkflowSection({ locale }: { locale: Locale }) {
@@ -148,10 +131,13 @@ function WorkflowSection({ locale }: { locale: Locale }) {
         <h2 id="workflow-title">{t('Hold. Speak. Release.')}</h2>
         <p>{t('One physical gesture carries a thought all the way back to your cursor.')}</p>
       </div>
+      <div className="workflow-demo">
+        <DictationDemo locale={locale} />
+      </div>
       <ol className="workflow-list reveal-target">
         {workflowSteps.map((step) => (
           <li key={step.number}>
-            <StepIllustration number={step.number} />
+            <StepIllustration number={step.number} locale={locale} />
             <span className="step-number">{step.number}</span>
             <h3>{t(step.title)}</h3>
             <p>{t(step.detail)}</p>
@@ -177,20 +163,7 @@ function ProductSection({ locale }: { locale: Locale }) {
           <p>{t('In local mode, SayType turns speech into text on your computer and inserts it at your cursor. Choose your engine once, then keep working where you are.')}</p>
         </div>
         <figure className="settings-figure reveal-target" data-reveal-delay="120">
-          <a href="/saytype-app-settings.png" target="_blank" rel="noreferrer" aria-label={t('View full-size SayType App Settings screenshot')}>
-          <img
-            src="/saytype-app-settings.png"
-            alt={t('SayType main window showing App Settings, appearance and software updates')}
-            width="1152"
-            height="768"
-            loading="lazy"
-            decoding="async"
-          />
-          </a>
-          <a className="settings-peek" href="/saytype-settings.png" target="_blank" rel="noreferrer" aria-label={t('View full-size SayType Dictation Settings screenshot')}>
-            <img src="/saytype-settings.png" alt="" width="1152" height="768" loading="lazy" decoding="async" />
-          </a>
-          <figcaption>{t('Real settings. Ready for your workflow.')} <a href="/saytype-app-settings.png" target="_blank" rel="noreferrer">{t('View full size')}</a></figcaption>
+          <AppsScene locale={locale} />
         </figure>
         <div className="capability-list">
           {featuredCapabilities.map((feature, index) => (
@@ -252,7 +225,7 @@ function PrivacySection({ locale }: { locale: Locale }) {
           <div className="engine-list" aria-label={t('Benefits of local transcription')}>
             {localBenefits.map((benefit) => (
               <article key={t(benefit.title)} className={`benefit-card benefit-${benefit.mark}`}>
-                <span className="benefit-mark" aria-hidden="true">{benefit.mark === 'offline' ? '↯' : benefit.mark === 'local' ? '⌂' : '∞'}</span>
+                <span className="benefit-mark" aria-hidden="true"><BenefitIcon mark={benefit.mark} /></span>
                 <div>
                   <h3>{t(benefit.title)}</h3>
                 </div>
@@ -301,7 +274,7 @@ function DownloadSection({ locale }: { locale: Locale }) {
   const t = homeCopy(locale)
   return (
     <section className="download-section" id="download" aria-labelledby="download-title">
-      <img className="download-waveform" src="/saytype-waveform.png" alt="" aria-hidden="true" />
+      <img className="download-waveform" src="/saytype-waveform.webp" loading="lazy" decoding="async" alt="" aria-hidden="true" />
       <div className="download-copy reveal-target">
         <p>{t('Offline dictation. No account. No subscription.')}</p>
         <h2 id="download-title">{t('Local transcription. No cloud needed.')}</h2>

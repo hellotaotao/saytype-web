@@ -5,9 +5,9 @@ const serializedMessaging = JSON.stringify(productMessaging).toLowerCase()
 
 describe('productMessaging', () => {
   it('matches the selected launch hero direction', () => {
-    expect(productMessaging.hero.headline).toBe('Local transcription. No account. No subscription.')
-    expect(productMessaging.hero.subheadline).toBe('Download a model. Transcribe offline.')
-    expect(productMessaging.hero.primaryCta).toBe('Download for Mac')
+    expect(productMessaging.hero.headline).toBe('Local transcription. Speak naturally. Mix languages.')
+    expect(productMessaging.hero.subheadline).toBe('Turn your voice into text on your device, right in the app you’re using—even when you mix languages.')
+    expect(productMessaging.hero.primaryCta).toBe('Download for free')
     expect(productMessaging.hero.secondaryCta).toBe('See how it works')
   })
 

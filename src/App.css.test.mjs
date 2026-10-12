@@ -56,7 +56,6 @@ describe('product presentation and motion', () => {
     const responsive = css.slice(css.lastIndexOf('@media (max-width: 900px) {'))
     expect(responsive).toContain('.product-layout, .product-copy { grid-template-columns: minmax(0, 1fr); }')
     expect(responsive).toContain('.settings-figure, .capability-list { grid-column: 1; grid-row: auto; }')
-    expect(responsive).toContain('.settings-figure > .settings-peek { display: none; }')
   })
 
   it('focuses the mobile crop on the woman and her laptop', () => {

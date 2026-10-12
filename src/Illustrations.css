@@ -1,0 +1,111 @@
+/* CSS-drawn product illustrations. Each .ill is a container and its stage sets
+   1em to a fixed fraction of the container width, so a scene scales as one
+   image. Motion is opt-in: without it every scene rests on a complete frame. */
+.ill { container-type: inline-size; width: 100%; }
+.ill-stage { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; letter-spacing: 0; text-align: left; }
+.ill-mic { flex: none; width: 2em; height: 2em; fill: #7bc1af; }
+.ill-wave { display: flex; flex: none; align-items: center; gap: 0.19em; height: 3em; }
+.ill-wave i { width: 0.28em; height: 100%; border-radius: 0.2em; background: linear-gradient(to top, #7bc1af, #a9e2d1); transform: scaleY(0.5); }
+.ill-wave i:nth-child(3n) { transform: scaleY(0.9); }
+.ill-wave i:nth-child(4n + 1) { transform: scaleY(0.3); }
+.ill-wave i:nth-child(5n + 2) { transform: scaleY(0.7); }
+.ill-typed { border-radius: 0.2em; }
+.ill-caret { display: inline-block; width: 0.12em; height: 1.1em; margin: 0 0.06em; background: #ff7a5c; vertical-align: -0.18em; }
+.ill-caret-before { display: none; }
+
+/* Shared window chrome */
+.as-titlebar { display: flex; align-items: center; gap: 0.5em; height: 2.6em; padding: 0 1em; border-bottom: 1px solid rgba(7, 20, 27, 0.08); background: #f3efe8; }
+.as-titlebar i { width: 0.8em; height: 0.8em; border-radius: 50%; background: #ff5f57; }
+.as-titlebar i:nth-child(2) { background: #febc2e; }
+.as-titlebar i:nth-child(3) { background: #28c840; }
+.as-titlebar span { margin-left: 0.8em; color: #5d686c; font-size: 1em; font-weight: 600; white-space: nowrap; }
+
+/* Product section: one shortcut, any app. Flat cards, no device frame. */
+.apps-scene .ill-stage { position: relative; height: 39em; font-size: calc(100cqw / 64); }
+.as-card { position: absolute; display: flex; flex-direction: column; border: 1px solid rgba(7, 20, 27, 0.08); border-radius: 1.3em; background: #fdfcf9; box-shadow: 0 1.4em 3.2em rgba(7, 20, 27, 0.13); color: #1c2a2e; overflow: hidden; }
+.as-card p { margin: 0; font-size: 1.3em; line-height: 1.5; }
+.as-head { display: flex; align-items: center; gap: 0.7em; padding: 0.85em 1.1em; border-bottom: 1px solid rgba(7, 20, 27, 0.08); color: #5d686c; font-size: 1.15em; font-weight: 700; white-space: nowrap; }
+.as-head i { width: 1.25em; height: 1.25em; border-radius: 0.38em; background: #ff7a5c; }
+.as-mail { top: 0; left: 0; width: 34em; height: 21em; }
+.as-ai { top: 3.4em; right: 0; width: 28em; height: 19em; border-color: transparent; background: #18211f; color: #e9e6df; }
+.as-chat { z-index: 1; left: 11em; bottom: 0; width: 40em; height: 18em; box-shadow: 0 0 0 0.22em rgba(20, 188, 215, 0.85), 0 1.8em 3.6em rgba(7, 20, 27, 0.2); }
+.as-ai .as-head { border-bottom-color: rgba(255, 255, 255, 0.08); color: #a9b5b0; }
+.as-ai .as-head i { background: #7bc1af; }
+.as-chat .as-head i { background: #14bcd7; }
+.as-card .as-field { display: flex; gap: 1em; padding: 0.55em 1.2em; border-bottom: 1px solid rgba(7, 20, 27, 0.08); }
+.as-field b { min-width: 4.4em; color: #8a9498; font-weight: 500; }
+.as-card .as-body { padding: 0.9em 1.2em; }
+.as-card .as-reply { align-self: flex-start; max-width: 86%; margin: 1.1em 1.2em 0; padding: 0.6em 0.9em; border-radius: 0.8em 0.8em 0.8em 0.2em; background: #26322f; color: #c9d2ce; }
+.as-card .as-input { margin: auto 1em 1em; padding: 0.65em 0.9em; border: 1px solid rgba(7, 20, 27, 0.16); border-radius: 0.7em; background: #fff; }
+.as-ai .as-input { margin-top: 1.1em; border-color: rgba(123, 193, 175, 0.5); background: #101716; color: #f1eee7; }
+.as-card .as-message { display: flex; align-items: center; gap: 0.7em; padding: 0.7em 1.1em 0; color: #3b494d; }
+.as-message i { flex: none; width: 1.7em; height: 1.7em; border-radius: 0.5em; background: #ffb59c; }
+.as-message + .as-message i { background: #8fd3d6; }
+.as-pill { position: absolute; z-index: 2; right: 10em; bottom: 4.6em; display: flex; align-items: center; gap: 0.9em; padding: 0.6em 1.2em; border-radius: 1.1em; background: linear-gradient(135deg, rgba(33, 46, 43, 0.98), rgba(20, 28, 27, 0.98)); box-shadow: 0 0.8em 1.8em rgba(7, 20, 27, 0.3), 0 0 0 1px rgba(123, 193, 175, 0.5); }
+.as-pill .ill-mic { width: 1.8em; height: 1.8em; }
+.as-pill .ill-wave { height: 2.4em; }
+
+.benefit-icon { width: 30px; height: 30px; fill: none; stroke: currentColor; stroke-width: 2.3; stroke-linecap: round; stroke-linejoin: round; }
+
+/* How it works: one small scene per step */
+.step-scene { display: grid; place-items: center; height: 100%; }
+.step-scene .ill-stage { font-size: calc(100cqw / 40); }
+.ss-keys { display: flex; align-items: center; gap: 1.1em; }
+.ss-keys kbd { display: grid; place-items: center; min-width: 4.3em; height: 3.5em; padding: 0 0.8em; border-radius: 0.7em; background: #fff; box-shadow: 0 0.5em 0 #e8aa9a, 0 1em 1.4em rgba(109, 50, 37, 0.2); color: #6e3e37; font: 800 1.5em/1 Arial, sans-serif; }
+.ss-keys span { color: #b4472f; font-size: 1.8em; font-weight: 800; }
+.ss-prompt { display: flex; align-items: center; gap: 1.2em; height: 7em; padding: 0 1.7em; border-radius: 1.4em; background: linear-gradient(135deg, rgba(33, 46, 43, 0.98), rgba(20, 28, 27, 0.98)); box-shadow: 0 0 2.4em rgba(123, 193, 175, 0.36), 0 1em 2.2em rgba(4, 56, 69, 0.3), 0 0 0 1px rgba(123, 193, 175, 0.5); }
+.ss-prompt .ill-mic { width: 2.3em; height: 2.3em; }
+.ss-prompt-text { color: rgba(241, 238, 231, 0.9); font-size: 1.35em; font-weight: 500; white-space: nowrap; }
+.ss-prompt .ill-wave { height: 3.4em; margin-left: 0.6em; }
+.ss-doc { width: 31em; border-radius: 1em; background: #fdfcf9; box-shadow: 0 1.2em 2.6em rgba(120, 86, 20, 0.24); overflow: hidden; }
+.ss-doc p { margin: 0; padding: 1.1em 1.3em 1.5em; color: #1c2a2e; font-size: 1.5em; line-height: 1.4; white-space: nowrap; }
+
+@container (max-width: 200px) {
+  .step-scene .ill-stage { font-size: calc(100cqw / 15); }
+  .ss-prompt-text { display: none; }
+  .ss-prompt { gap: 0.7em; height: 5.4em; padding: 0 1em; }
+  .ss-prompt .ill-wave { margin-left: 0; }
+  .ss-prompt .ill-wave i:nth-child(n + 11) { display: none; }
+  .ss-doc { width: 13.4em; }
+  .ss-doc p { padding: 0.6em 0.7em 0.9em; font-size: 1.3em; white-space: normal; }
+  .ss-keys { gap: 0.5em; }
+  .ss-keys kbd { min-width: 3.4em; height: 3em; padding: 0 0.4em; font-size: 1.25em; }
+  .ss-keys span { font-size: 1.3em; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ill-wave i { animation: ill-wave-bar 0.9s ease-in-out infinite alternate; }
+  .ill-wave i:nth-child(2n) { animation-duration: 0.62s; animation-delay: -0.3s; }
+  .ill-wave i:nth-child(3n) { animation-duration: 0.78s; animation-delay: -0.55s; }
+  .ill-wave i:nth-child(5n) { animation-duration: 1.1s; animation-delay: -0.8s; }
+  .ill-wave i:nth-child(7n) { animation-duration: 0.5s; animation-delay: -0.15s; }
+  .ill-caret { background: none; animation: ill-blink 1.05s steps(1) infinite; }
+  .ill-caret::before { content: ''; display: block; width: 100%; height: 100%; background: #ff7a5c; }
+  .ill-caret-before { display: inline-block; }
+
+  .as-pill .ill-wave i, .as-card .ill-caret { animation: none; }
+  .as-card .ill-caret { background: #ff7a5c; }
+  .as-card .ill-caret::before { content: none; }
+
+  /* Steps share one 6s loop so the three tiles read as a sequence. */
+  .ss-keys kbd { animation: ss-key 6s linear infinite; }
+  .ss-doc .ill-typed { animation: ss-typed 6s linear infinite; }
+  .ss-doc .ill-caret-before::before { animation: ss-caret-before 6s steps(1) infinite; }
+  .ss-doc .ill-caret-after::before { animation: ss-caret-after 6s steps(1) infinite; }
+}
+
+@keyframes ill-wave-bar { from { transform: scaleY(0.26); } to { transform: scaleY(1); } }
+@keyframes ill-blink { 50% { opacity: 0; } }
+@keyframes ss-key {
+  0%, 6% { translate: 0 0; box-shadow: 0 0.5em 0 #e8aa9a, 0 1em 1.4em rgba(109, 50, 37, 0.2); background: #fff; }
+  9%, 58% { translate: 0 0.34em; box-shadow: 0 0.16em 0 #e8aa9a, 0 0.5em 0.9em rgba(109, 50, 37, 0.2); background: #ffe9e2; }
+  61%, 100% { translate: 0 0; box-shadow: 0 0.5em 0 #e8aa9a, 0 1em 1.4em rgba(109, 50, 37, 0.2); background: #fff; }
+}
+@keyframes ss-typed {
+  0%, 63% { opacity: 0; background: transparent; }
+  65% { opacity: 1; background: rgba(255, 122, 92, 0.3); }
+  74%, 94% { opacity: 1; background: transparent; }
+  99%, 100% { opacity: 0; background: transparent; }
+}
+@keyframes ss-caret-before { 0% { opacity: 1; } 64.5% { opacity: 0; } 99% { opacity: 1; } }
+@keyframes ss-caret-after { 0% { opacity: 0; } 64.5% { opacity: 1; } 99% { opacity: 0; } }

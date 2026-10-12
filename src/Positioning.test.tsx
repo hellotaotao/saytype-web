@@ -9,8 +9,11 @@ describe('local-first marketing hierarchy', () => {
         const html = renderToStaticMarkup(<App locale={locale} preview={preview} />)
         const hero = html.match(/<section class="hero-section illustrated-hero"[\s\S]*?<\/section>/)![0]
         const heading = hero.match(/<h1[\s\S]*?<\/h1>/)![0]
-        for (const text of locale === 'zh' ? ['本地转写。', '无需账号。', '无需订阅。'] : ['Local transcription.', 'No account.', 'No subscription.']) expect(heading).toContain(text)
+        for (const text of locale === 'zh' ? ['本地语音转写。', '自然说，', '混着说。'] : ['Local transcription.', 'Speak naturally.', 'Mix languages.']) expect(heading).toContain(text)
         expect(hero).not.toContain('Ctrl+Shift')
+        expect(hero).toContain(locale === 'zh' ? '免费下载' : 'Download for free')
+        expect(hero).toContain(locale === 'zh' ? '无需账号 · 无需订阅 · 下载模型后即可离线使用' : 'No account · No subscription · Works offline after model download')
+        expect(hero).not.toMatch(/Chinese|中英/)
         expect(html.indexOf('id="privacy"')).toBeLessThan(html.indexOf('id="workflow"'))
         expect(html.indexOf('id="workflow"')).toBeLessThan(html.indexOf('id="product"'))
         const benefits = html.match(/<section class="privacy-section"[\s\S]*?<\/section>/)![0]
@@ -44,7 +47,7 @@ describe('concise hero copy', () => {
     it(`uses one short supporting sentence in ${locale}`, () => {
       const html = renderToStaticMarkup(<App locale={locale} preview={null} />)
       const description = html.match(/<p class="hero-description">([^<]+)<\/p>/)![1]
-      expect(description).toBe(locale === 'zh' ? '下载模型，即可离线转写。' : 'Download a model. Transcribe offline.')
+      expect(description).toBe(locale === 'zh' ? '在你的设备上，把语音转成当前应用里的文字。一句话里混用多种语言，也能按自己的习惯表达。' : 'Turn your voice into text on your device, right in the app you’re using—even when you mix languages.')
     })
   }
 })

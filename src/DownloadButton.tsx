@@ -1,5 +1,5 @@
 import { useEffect, useState, type MouseEvent } from 'react'
-import { homeCopy } from './content/homeCopy'
+import { homeCopy, type HomeCopyKey } from './content/homeCopy'
 import type { Locale } from './i18n'
 import './DownloadButton.css'
 import {
@@ -29,13 +29,13 @@ function getCurrentDownloadPlatform(): DownloadPlatform | null {
   return detectDownloadPlatform(platform, navigator.userAgent)
 }
 
-export default function DownloadButton({ locale }: { locale: Locale }) {
+export default function DownloadButton({ locale, label: customLabel }: { locale: Locale; label?: HomeCopyKey }) {
   const t = homeCopy(locale)
   const [platform, setPlatform] = useState<DownloadPlatform | null>('macos')
   useEffect(() => { setPlatform(getCurrentDownloadPlatform()) }, [])
   const [isResolving, setIsResolving] = useState(false)
   const platformDetails = platform ? downloadPlatforms[platform] : null
-  const label = t(platformDetails?.label ?? 'View downloads')
+  const label = t(customLabel ?? platformDetails?.label ?? 'View downloads')
   const href = platform ? getFallbackDownloadUrl(platform) : releasePageUrl
 
   const handleClick = async (event: MouseEvent<HTMLAnchorElement>) => {
@@ -65,7 +65,7 @@ export default function DownloadButton({ locale }: { locale: Locale }) {
       className="download-button"
       href={href}
       aria-label={
-        t(platformDetails ? `Download SayType for ${platformDetails.name}` : 'View SayType downloads')
+        [customLabel ? t(customLabel) : null, t(platformDetails ? `Download SayType for ${platformDetails.name}` : 'View SayType downloads')].filter(Boolean).join(' — ')
       }
       aria-busy={isResolving || undefined}
       onClick={handleClick}

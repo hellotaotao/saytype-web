@@ -13,7 +13,7 @@ describe('SayType launch page', () => {
     const html = renderToStaticMarkup(<App />)
 
     expect(html).toContain('Local transcription.')
-    expect(html).toContain('No account.')
+    expect(html).toContain('No account · No subscription · Works offline after model download')
     expect(html).toContain('No subscription.')
     expect(html).toContain('Optional cloud transcription · Bring your own API key.')
     expect(html).toContain('Hold. Speak. Release.')
@@ -25,8 +25,7 @@ describe('SayType launch page', () => {
     const html = renderToStaticMarkup(<App />)
 
     expect(html).toContain('src="/saytype-icon.png"')
-    expect(html).toContain('src="/saytype-waveform.png"')
-    expect(html).toContain('src="/saytype-settings.png"')
+    expect(html).toContain('src="/saytype-waveform.webp"')
   })
 
   it('uses full-scene artwork with product detail in the hero', () => {
@@ -35,18 +34,16 @@ describe('SayType launch page', () => {
     expect(hero).toContain('src="/saytype-home-hero.webp"')
     expect(hero).toContain('width="1904" height="826"')
     expect(hero).toContain('class="hero-product-peek"')
-    expect(hero).toContain('src="/saytype-settings.png"')
+    expect(hero).toContain('class="dictation-demo"')
   })
 
-  it('shows real App Settings before capabilities with a full-size link', () => {
+  it('shows the any-app illustration before capabilities', () => {
     const html = renderToStaticMarkup(<App />)
     const product = html.match(/<section class="product-section"[\s\S]*?<\/section>/)?.[0] ?? ''
-    const screenshotPosition = product.indexOf('src="/saytype-app-settings.png"')
-    expect(screenshotPosition).toBeGreaterThan(-1)
-    expect(product.indexOf('class="capability-list"')).toBeGreaterThan(screenshotPosition)
-    expect(product).toContain('width="1152" height="768"')
-    expect(product).toContain('App Settings')
-    expect(product).toContain('View full size')
+    const scenePosition = product.indexOf('class="ill apps-scene"')
+    expect(scenePosition).toBeGreaterThan(-1)
+    expect(product.indexOf('class="capability-list"')).toBeGreaterThan(scenePosition)
+    expect(product).not.toContain('saytype-app-settings.png')
   })
 
   it('defaults to editorial without preview controls or experiment state', () => {
@@ -135,7 +132,7 @@ describe('localized launch page', () => {
 
   it('translates every section and navigation into Chinese', () => {
     const html = renderToStaticMarkup(<App locale="zh" preview={null} />)
-    for (const text of ['跳到正文', '按住，说话，松开。', '随时待命，不打扰工作。', '你的话，留在你的设备上。', '适配你的桌面平台。', '主要测试平台', 'Windows', 'Linux', '本地转写，无需云端。', '产品更新', '本地模式无需注册或 API key', '查看原图']) {
+    for (const text of ['跳到正文', '按住，说话，松开。', '随时待命，不打扰工作。', '你的话，留在你的设备上。', '适配你的桌面平台。', '主要测试平台', 'Windows', 'Linux', '本地转写，无需云端。', '产品更新', '本地模式无需注册或 API key', '重构这个函数，保留原来的 error handling。']) {
       expect(html).toContain(text)
     }
     expect(html).toContain('href="/zh/updates"')
@@ -148,11 +145,11 @@ describe('localized launch page', () => {
     expect(html).not.toMatch(/(?:src|href)="\.\//)
   })
 
-  it('localizes preview controls without changing the real screenshots', () => {
+  it('localizes preview controls and illustrations', () => {
     const html = renderToStaticMarkup(<App locale="zh" preview="stage" />)
     expect(html).toContain('布局预览')
     expect(html).toContain('退出预览')
-    expect(html).toContain('src="/saytype-settings.png"')
+    expect(html).toContain('马上到，十分钟！')
   })
 
   it('keeps the initial download markup deterministic across visitor platforms', () => {
