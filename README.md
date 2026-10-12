@@ -1,12 +1,12 @@
-# SayType Website
+# TypeAloud Website
 
-Product marketing homepage for SayType, a Tauri desktop voice input app. macOS is the primary tested path; Windows and Linux builds remain experimental.
+Product marketing homepage for TypeAloud, a Tauri desktop voice input app. macOS is the primary tested path; Windows and Linux builds remain experimental.
 
 ## Product message
 
 The homepage leads with local transcription, no account and no subscription. Both languages present local benefits before the short workflow; optional cloud features are disclosed below the primary pitch. Download prerequisites appear before the final download action. These claims apply to local transcription, not optional cloud services.
 
-Hold `Ctrl+Shift`, speak, release: SayType transcribes with the configured engine and inserts text at the cursor. `Escape` cancels. Local Qwen3 transcription needs no account or API key after the model download. Optional Groq/OpenAI transcription and English translation upload audio to the configured provider using the user's own key; provider charges may apply.
+Hold `Ctrl+Shift`, speak, release: TypeAloud transcribes with the configured engine and inserts text at the cursor. `Escape` cancels. Local Qwen3 transcription needs no account or API key after the model download. Optional Groq/OpenAI transcription and English translation upload audio to the configured provider using the user's own key; provider charges may apply.
 
 Copy is checked against `../SayType` at tag `v1.15.2`, especially `README.md`, `docs/local-asr.md`, `docs/cloud-transcription.md`, `docs/dictation-recovery.md`, the Settings UI, and the updater implementation. Hardware-aware onboarding/default changes in the desktop working tree are not advertised as released behavior.
 
@@ -53,6 +53,12 @@ npm run preview -- --host 127.0.0.1 --port 4175
 ```
 
 Check the page at 320, 390, 768, 1100, 1280 and 1440px: anchor navigation, model disclosure, per-platform download links, download fallback, reduced motion, console/network errors and overflow. Production output is `dist/`. Deployments are separate from local validation.
+
+## Comparison and guide pages
+
+Four search-intent pages exist in both languages (`/wispr-flow-alternative`, `/typeless-alternative`, `/offline-dictation-mac`, `/chinese-english-dictation`, and the same under `/zh`). Copy, page titles, descriptions and FAQs live in `src/content/landingPages.json`; `src/landing/LandingPage.tsx` renders them and `src/landing/GuideLinks.tsx` links to them from every page. To add a page, add its entry to the JSON and its id to `landingPageIds` in `src/i18n.ts`; routing, pre-rendering, the sitemap and FAQ structured data follow.
+
+Competitor prices, limits and platforms are quoted from the official pages listed in each entry's `sources`, with the `checked` date shown under the table. Recheck them when that date gets old. TypeAloud claims on these pages follow the same rule as the homepage: nothing the released app does not do (no AI rewriting, no mobile app).
 
 ## Product updates and release history
 

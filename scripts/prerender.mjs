@@ -2,15 +2,17 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { createServer } from 'vite';
 import { createElement } from 'react';
 import { renderToString } from 'react-dom/server';
-import { renderDocument, renderSitemap, siteUrl, sitePages } from './site-pages.mjs';
+import { landingPages, renderDocument, renderSitemap, siteUrl, sitePages } from './site-pages.mjs';
 
 const template = await readFile('dist/index.html', 'utf8');
 const server = await createServer({server:{middlewareMode:true, hmr:false, ws:false}, appType:'custom', optimizeDeps:{noDiscovery:true, include:[]}});
 try {
   const {default: App} = await server.ssrLoadModule('/src/App.tsx');
   const {default: UpdatesPage} = await server.ssrLoadModule('/src/updates/UpdatesPage.tsx');
+  const {default: LandingPage} = await server.ssrLoadModule('/src/landing/LandingPage.tsx');
+  const landingIds = new Set(landingPages.map(({id}) => id));
   for (const {page,locale,path} of sitePages) {
-    const element = page === 'home' ? createElement(App,{locale,preview:null}) : createElement(UpdatesPage,{page,locale});
+    const element = page === 'home' ? createElement(App,{locale,preview:null}) : createElement(landingIds.has(page) ? LandingPage : UpdatesPage,{page,locale});
     const markup = renderToString(element);
     const html = renderDocument(template,markup,page,locale);
     if (path === '/') {

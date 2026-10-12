@@ -10,6 +10,7 @@ import DictationDemo from './DictationDemo'
 import { AppsScene, BenefitIcon, StepScene } from './Illustrations'
 import { releasePageUrl } from './downloads'
 import { useDownload } from './useDownload'
+import GuideLinks from './landing/GuideLinks'
 const workflowSteps = [
   {
     number: '01',
@@ -19,7 +20,7 @@ const workflowSteps = [
   {
     number: '02',
     title: 'Speak',
-    detail: 'SayType listens while a compact prompt keeps you oriented.',
+    detail: 'TypeAloud listens while a compact prompt keeps you oriented.',
   },
   {
     number: '03',
@@ -66,6 +67,7 @@ function App({ locale = 'en' }: { locale?: Locale }) {
         <PlatformSection locale={locale} />
         <DownloadSection locale={locale} />
       </main>
+      <GuideLinks locale={locale} />
       <SiteFooter locale={locale} />
     </div>
   )
@@ -149,7 +151,7 @@ function ProductSection({ locale }: { locale: Locale }) {
       <div className="product-layout">
         <div className="product-copy reveal-target">
           <h2 id="product-title">{t('Ready when you are. Invisible when you’re not.')}</h2>
-          <p>{t('In local mode, SayType turns speech into text on your computer and inserts it at your cursor. Choose your engine once, then keep working where you are.')}</p>
+          <p>{t('In local mode, TypeAloud turns speech into text on your computer and inserts it at your cursor. Choose your engine once, then keep working where you are.')}</p>
         </div>
         <figure className="settings-figure reveal-target" data-reveal-delay="120">
           <AppsScene locale={locale} />
@@ -228,9 +230,9 @@ function PrivacySection({ locale }: { locale: Locale }) {
 }
 
 const platforms = [
-  { id: 'macos', name: 'macOS', status: 'Primary tested platform', icon: 'apple', downloadLabel: 'Download SayType for Mac' },
-  { id: 'windows', name: 'Windows', status: 'Experimental', icon: 'windows', downloadLabel: 'Download SayType for Windows' },
-  { id: 'linux', name: 'Linux', status: 'Experimental', icon: 'linux', downloadLabel: 'Download SayType for Linux' },
+  { id: 'macos', name: 'macOS', status: 'Primary tested platform', icon: 'apple', downloadLabel: 'Download TypeAloud for Mac' },
+  { id: 'windows', name: 'Windows', status: 'Experimental', icon: 'windows', downloadLabel: 'Download TypeAloud for Windows' },
+  { id: 'linux', name: 'Linux', status: 'Experimental', icon: 'linux', downloadLabel: 'Download TypeAloud for Linux' },
 ] as const
 
 function PlatformCard({ platform, locale }: { platform: (typeof platforms)[number]; locale: Locale }) {
@@ -301,7 +303,7 @@ function SiteFooter({ locale }: { locale: Locale }) {
     <footer className="site-footer">
       <a className="brand-lockup" href="#top" aria-label={t('Back to top')}>
         <img src="/saytype-icon.png" alt="" width="42" height="42" />
-        <span>SayType</span>
+        <span>TypeAloud</span>
       </a>
       <p>{t('Voice to text. On your device.')}</p>
       <a href={localizedPath('updates', locale)}>{t('Updates')}</a>

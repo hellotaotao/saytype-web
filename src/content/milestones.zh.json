@@ -64,7 +64,7 @@
     "title": "用保存的录音重试，不必再说一遍。",
     "category": "失败恢复",
     "introducedVersion": "v1.8.0",
-    "summary": "最初的恢复功能针对本地转写卡住的情况：SayType 会自动重试一次；若仍无法完成，就把录音保存到历史记录中，标为待处理，供之后重试。",
+    "summary": "最初的恢复功能针对本地转写卡住的情况：TypeAloud 会自动重试一次；若仍无法完成，就把录音保存到历史记录中，标为待处理，供之后重试。",
     "details": ["后续版本将录音恢复扩展到更多转写失败场景，并改善历史记录中的原因说明。", "手动重试会使用当前选择的引擎，因此切换服务提供商或修正 API key 后，可以用保存的录音再次尝试。"],
     "scope": "重试的前提是音频已成功保存。历史记录最多保留 100 条，保存的录音并非永久备份。",
     "evolution": [{"version": "v1.13.3", "description": "更多失败请求会保留音频和错误原因；重试使用当前引擎，成功后直接替换原来的待处理记录。"}, {"version": "v1.13.4", "description": "重试结果为空时仍保留录音；云端转写或翻译在采集不完整时失败，也不再遗漏历史记录。"}]
@@ -74,7 +74,7 @@
     "title": "边说话，边看到文字出现。",
     "category": "实时转写",
     "introducedVersion": "v1.8.9",
-    "summary": "Nemotron 3.5 成为 SayType 的第二款本地引擎，率先在 Apple Silicon 上提供流式识别。它会在录音过程中实时生成文字，与 Qwen 的批处理方式并存。",
+    "summary": "Nemotron 3.5 成为 TypeAloud 的第二款本地引擎，率先在 Apple Silicon 上提供流式识别。它会在录音过程中实时生成文字，与 Qwen 的批处理方式并存。",
     "details": ["每款本地引擎都可以独立下载，并在应用的引擎选择控件中切换。", "使用本地引擎时，音频留在设备上。翻译模式已在 v1.16.0 移除。"],
     "scope": "Nemotron 是适用于 Apple Silicon 和 Windows x64 的实验性选项。提供平台版本，不代表每种设备都已完成端到端验证。",
     "evolution": [{"version": "v1.11.0", "description": "Nemotron 新增 Windows x64 支持，使用 CPU 运行时。"}, {"version": "v1.15.2", "description": "Nemotron 开放语言选择，不再像 Qwen 一样固定为自动检测。"}, {"version": "v1.15.3", "description": "修改语言后即可在实时听写中生效，无需重启应用。"}, {"version": "v1.16.0", "description": "移除独立的翻译模式及其服务商选择、上传同意提示；本地引擎不需要的 API key 输入框直接隐藏。"}]
@@ -84,7 +84,7 @@
     "title": "更新版本，不必再找安装包。",
     "category": "应用更新",
     "introducedVersion": "v1.4.0",
-    "summary": "v1.4.0 带来了后台更新检查和应用内安装。SayType 每天检查更新，下载可用的新版本，再由你决定何时重启。",
+    "summary": "v1.4.0 带来了后台更新检查和应用内安装。TypeAloud 每天检查更新，下载可用的新版本，再由你决定何时重启。",
     "details": ["也可以在设置中手动检查更新。", "安装更新仍需要你主动操作，不会在工作过程中自动重启。"],
     "scope": "以上功能适用于桌面应用正式版本的内置更新器。",
     "evolution": [{"version": "v1.15.6", "description": "首页更新卡片新增“更新内容”链接，指向该版本的 GitHub 发布说明，方便在重启前查看变化。"}]
@@ -94,7 +94,7 @@
     "title": "听写，可以留在自己的设备上。",
     "category": "本地转写",
     "introducedVersion": "v1.4.0",
-    "summary": "Qwen3-ASR 为 SayType 带来了设备端语音识别。下载模型后，本地转写无需账号、API key 或网络连接即可运行。",
+    "summary": "Qwen3-ASR 为 TypeAloud 带来了设备端语音识别。下载模型后，本地转写无需账号、API key 或网络连接即可运行。",
     "details": ["设置页新增模型下载、进度和移除功能，并支持在本地与云端转写之间选择。", "下一个版本在 Apple Silicon 上更突出本地设置，并提供首页和菜单栏的快捷引擎切换。"],
     "scope": "最初面向 Mac 推出，推荐使用 Apple Silicon 进行本地转写。可选的 Groq/OpenAI 转写仍会将音频上传至所选服务提供商；翻译模式已移除。",
     "evolution": [{"version": "v1.5.0", "description": "Apple Silicon 的首次设置开始优先引导使用本地模型，并在首页和托盘中增加切换引擎的入口。"}, {"version": "v1.6.0", "description": "本地解码新增录音结束后逐字显示的进度预览。这并不是后来由 Nemotron 提供的实时识别。"}, {"version": "v1.16.0", "description": "移除翻译模式，Shift+Alt 改为普通录音快捷键。"}]

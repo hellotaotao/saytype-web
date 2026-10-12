@@ -9,9 +9,9 @@ export default function SiteHeader({ locale, page }: { locale: Locale; page: Pag
   const home = localizedPath('home', locale)
   return (
     <header className="site-header" aria-label={t('Primary navigation')}>
-      <a className="site-brand" href={home} aria-label={t('SayType home')}>
+      <a className="site-brand" href={home} aria-label={t('TypeAloud home')}>
         <img src="/saytype-icon.png" alt="" width="42" height="42" />
-        <span>SayType</span>
+        <span>TypeAloud</span>
       </a>
       <nav className="site-nav" aria-label={t('Page sections')}>
         <a href={`${home}#privacy`}>{t('Privacy')}</a>

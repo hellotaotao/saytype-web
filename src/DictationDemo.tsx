@@ -3,7 +3,7 @@ import './DictationDemo.css'
 
 const demoCopy = {
   en: {
-    label: 'Animated demo: hold the shortcut, speak a sentence that mixes two languages, release, and SayType inserts the text at the cursor.',
+    label: 'Animated demo: hold the shortcut, speak a sentence that mixes two languages, release, and TypeAloud inserts the text at the cursor.',
     app: 'Notes',
     menu: ['File', 'Edit', 'View'],
     title: 'Weekly sync',
@@ -14,7 +14,7 @@ const demoCopy = {
     transcribing: 'Transcribing audio...',
   },
   zh: {
-    label: '动画演示：按住快捷键，说一句混用两种语言的话，松开后 SayType 把文字输入到光标处。',
+    label: '动画演示：按住快捷键，说一句混用两种语言的话，松开后 TypeAloud 把文字输入到光标处。',
     app: '备忘录',
     menu: ['文件', '编辑', '显示'],
     title: '周会记录',

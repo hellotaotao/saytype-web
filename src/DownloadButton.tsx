@@ -37,7 +37,7 @@ export default function DownloadButton({ locale, label: customLabel }: { locale:
       className="download-button"
       href={href}
       aria-label={
-        [customLabel ? t(customLabel) : null, t(platformDetails ? `Download SayType for ${platformDetails.name}` : 'View SayType downloads')].filter(Boolean).join(' — ')
+        [customLabel ? t(customLabel) : null, t(platformDetails ? `Download TypeAloud for ${platformDetails.name}` : 'View TypeAloud downloads')].filter(Boolean).join(' — ')
       }
       aria-busy={isResolving || undefined}
       onClick={onClick}

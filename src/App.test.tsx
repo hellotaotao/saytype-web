@@ -2,7 +2,7 @@ import { renderToStaticMarkup } from 'react-dom/server'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import App from './App'
 
-describe('SayType launch page', () => {
+describe('TypeAloud launch page', () => {
   it('links to product updates from the header and mobile-visible footer', () => {
     const html = renderToStaticMarkup(<App />)
     expect(html.match(/href="\/updates"/g)).toHaveLength(2)
@@ -56,7 +56,7 @@ describe('SayType launch page', () => {
     const html = renderToStaticMarkup(<App />)
 
     expect(html).toContain('aria-label="Primary navigation"')
-    expect(html).toContain('aria-label="Download SayType for Mac"')
+    expect(html).toContain('aria-label="Download TypeAloud for Mac"')
     expect(html).toContain(
       'href="https://github.com/hellotaotao/saytype/releases/latest"',
     )
@@ -125,7 +125,7 @@ describe('localized launch page', () => {
     expect(html).toContain('href="/zh/updates"')
     expect(html).toContain('href="#workflow"')
     expect(html).toContain('aria-label="主要导航"')
-    expect(html).toContain('aria-label="下载 Mac 版 SayType"')
+    expect(html).toContain('aria-label="下载 Mac 版 TypeAloud"')
     expect(html).toContain('音频发送给 Groq 或 OpenAI')
     expect(html).toContain('Qwen3-ASR 1.7B 和 Nemotron 实时转写属于实验性选项')
     expect(html).not.toContain('Your voice.')

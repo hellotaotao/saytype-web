@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { localizedPath, parseRoute, switchLocaleHref } from './i18n'
+import landingPages from './content/landingPages.json'
+import { landingPageIds, localizedPath, parseRoute, switchLocaleHref } from './i18n'
 
 describe('locale routes', () => {
   it.each([
@@ -17,6 +18,14 @@ describe('locale routes', () => {
   })
   it.each(['/zh-extra', '/zh/updates-extra', '/changelog/unknown', '//evil.example', '/ZH'])('does not guess locales from prefixes: %s', path => {
     expect(parseRoute(path)).toBeNull()
+  })
+  it('routes every landing page in both languages and keeps the route list in sync with its content', () => {
+    expect(landingPages.pages.map(({ id }) => id)).toEqual([...landingPageIds])
+    for (const id of landingPageIds) {
+      expect(parseRoute(`/${id}`)).toEqual({ page: id, locale: 'en' })
+      expect(parseRoute(`/zh/${id}/`)).toEqual({ page: id, locale: 'zh' })
+      expect(switchLocaleHref(`/${id}`, 'zh')).toBe(`/zh/${id}`)
+    }
   })
   it('preserves the same logical page, query and release fragment when changing language', () => {
     expect(switchLocaleHref('/changelog','zh','?ref=home','#release-v1-15-3')).toBe('/zh/changelog?ref=home#release-v1-15-3')

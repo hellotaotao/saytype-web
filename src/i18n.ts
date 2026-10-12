@@ -1,5 +1,12 @@
 export type Locale = 'en' | 'zh'
-export type Page = 'home' | 'updates' | 'changelog'
+export const landingPageIds = ['wispr-flow-alternative', 'typeless-alternative', 'offline-dictation-mac', 'chinese-english-dictation'] as const
+export type LandingPageId = (typeof landingPageIds)[number]
+export type Page = 'home' | 'updates' | 'changelog' | LandingPageId
+const pages: readonly Page[] = ['home', 'updates', 'changelog', ...landingPageIds]
+
+export function isLandingPage(page: Page): page is LandingPageId {
+  return (landingPageIds as readonly string[]).includes(page)
+}
 export interface SiteRoute { locale: Locale; page: Page }
 
 export function localizedPath(page: Page, locale: Locale): string {
@@ -10,7 +17,7 @@ export function localizedPath(page: Page, locale: Locale): string {
 export function parseRoute(pathname: string): SiteRoute | null {
   const path = pathname.replace(/\/index\.html$/, '').replace(/\.html$/, '').replace(/\/$/, '') || '/'
   for (const locale of ['en', 'zh'] as const) {
-    for (const page of ['home', 'updates', 'changelog'] as const) {
+    for (const page of pages) {
       if (path === localizedPath(page, locale)) return { locale, page }
     }
   }

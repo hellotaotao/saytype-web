@@ -16,7 +16,7 @@ export const latestReleaseApiUrl =
   'https://api.github.com/repos/hellotaotao/saytype/releases/latest'
 export const releasePageUrl = 'https://github.com/hellotaotao/saytype/releases/latest'
 
-// The mainland-China mirror: SayType's release workflow copies each release's
+// The mainland-China mirror: TypeAloud's release workflow copies each release's
 // macOS and Windows installers into this site's /download path, because GitHub
 // is slow or unreachable from mainland China. The index names the current files.
 export const mirrorIndexUrl = '/download/releases/current.json'

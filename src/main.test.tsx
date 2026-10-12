@@ -4,6 +4,7 @@ const { createRoot, hydrateRoot, render } = vi.hoisted(() => ({ createRoot: vi.f
 vi.mock('react-dom/client', () => ({ createRoot, hydrateRoot }))
 vi.mock('./App.tsx', () => ({ default: 'homepage' }))
 vi.mock('./updates/UpdatesPage.tsx', () => ({ default: 'updates-page' }))
+vi.mock('./landing/LandingPage.tsx', () => ({ default: 'landing-page' }))
 
 afterEach(() => { vi.unstubAllGlobals(); vi.clearAllMocks() })
 
@@ -53,6 +54,13 @@ describe('bilingual browser entry', () => {
     expect(page.props.locale).toBe('zh')
     expect(page.props.page).toBe(logicalPage)
     expect(document.documentElement.lang).toBe('zh-CN')
+  })
+  it.each([['/typeless-alternative', 'en'], ['/zh/wispr-flow-alternative', 'zh']])('hydrates the landing page %s', async (path, locale) => {
+    await mount(path, true)
+    const page = hydrateRoot.mock.calls[0][1].props.children
+    expect(page.type).toBe('landing-page')
+    expect(page.props.locale).toBe(locale)
+    expect(page.props.page).toBe(path.split('/').pop())
   })
   it('hydrates the normal English homepage', async () => {
     await mount('/', true)

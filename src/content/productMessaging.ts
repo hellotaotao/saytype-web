@@ -47,7 +47,7 @@ export type ProviderDetail = {
 }
 
 export type ProductMessaging = {
-  productName: 'SayType'
+  productName: 'TypeAloud'
   currentReality: string
   hero: {
     eyebrow: string
@@ -78,9 +78,9 @@ export type ProductMessaging = {
 }
 
 export const productMessaging: ProductMessaging = {
-  productName: 'SayType',
+  productName: 'TypeAloud',
   currentReality:
-    'SayType is a Tauri desktop voice input app. On Apple Silicon Macs it can run Qwen3 transcription locally after a one-time model download; Groq and OpenAI remain optional cloud engines using your own key.',
+    'TypeAloud is a Tauri desktop voice input app. On Apple Silicon Macs it can run Qwen3 transcription locally after a one-time model download; Groq and OpenAI remain optional cloud engines using your own key.',
   hero: {
     eyebrow: 'Local transcription. No account. No subscription.',
     headline: 'Local transcription. Speak naturally. Mix languages.',
@@ -173,7 +173,7 @@ export const productMessaging: ProductMessaging = {
   workflow: [
     {
       label: '01',
-      title: 'Keep SayType in the tray',
+      title: 'Keep TypeAloud in the tray',
       description: 'The desktop app stays out of the way in the menu bar or system tray until you need it.',
     },
     {
@@ -189,13 +189,13 @@ export const productMessaging: ProductMessaging = {
     {
       label: '04',
       title: 'Release to transcribe',
-      description: 'SayType stops recording on release and transcribes with your selected local or cloud engine. Local mode shows progress as text arrives.',
+      description: 'TypeAloud stops recording on release and transcribes with your selected local or cloud engine. Local mode shows progress as text arrives.',
     },
     {
       label: '05',
       title: 'Text appears in place',
       description:
-        'On macOS, SayType inserts the transcript into the active app. If an app blocks insertion, the completed text remains available in History to copy.',
+        'On macOS, TypeAloud inserts the transcript into the active app. If an app blocks insertion, the completed text remains available in History to copy.',
     },
     {
       label: '06',
@@ -237,7 +237,7 @@ export const productMessaging: ProductMessaging = {
     {
       id: 'quiet-background',
       title: 'Quiet background operation',
-      description: 'SayType runs from the tray, supports auto launch, and downloads verified updates in the background for you to install when ready.',
+      description: 'TypeAloud runs from the tray, supports auto launch, and downloads verified updates in the background for you to install when ready.',
     },
     {
       id: 'history',
@@ -262,7 +262,7 @@ export const productMessaging: ProductMessaging = {
     {
       title: 'Your audio stays local in local mode',
       description:
-        'Qwen3-ASR runs on your machine after its one-time download. SayType has no server in the middle; cloud mode is an explicit choice.',
+        'Qwen3-ASR runs on your machine after its one-time download. TypeAloud has no server in the middle; cloud mode is an explicit choice.',
     },
   ],
   platforms: [
@@ -314,7 +314,7 @@ export const productMessaging: ProductMessaging = {
   cta: {
     headline: 'Your voice. No cloud required.',
     description:
-      'Use SayType when typing becomes the bottleneck: comments, tickets, docs, replies, notes, and multilingual work across the apps you already use.',
+      'Use TypeAloud when typing becomes the bottleneck: comments, tickets, docs, replies, notes, and multilingual work across the apps you already use.',
     note: 'macOS is the primary path. Apple Silicon is recommended for local dictation, with a ~1 GB download for Qwen3-ASR 0.6B; microphone access and macOS Accessibility permission are required for the full voice-typing workflow.',
   },
 }

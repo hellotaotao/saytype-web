@@ -3,6 +3,7 @@ import { getMilestones, getReleaseTranslation, releases, releaseAnchor, releaseH
 import { localizedPath, type Locale } from '../i18n'
 import SiteHeader from '../SiteHeader'
 import ReleaseNotes from './ReleaseNotes'
+import GuideLinks from '../landing/GuideLinks'
 import './UpdatesPage.css'
 
 function dateLabel(value: string, locale: Locale) {
@@ -48,7 +49,7 @@ function Changelog({ locale }: { locale: Locale }) {
           return (
             <section className="release-year" key={year} id={`year-${year}`} aria-labelledby={`year-title-${year}`}>
               <h2 id={`year-title-${year}`}>{year}</h2>
-              {Number(year) < 2026 && <p className="legacy-notice"><strong>{locale === 'zh' ? '历史版本。' : 'Historical releases.'}</strong>{locale === 'zh' ? '这些说明描述的是早期 SayType，可能与当前应用不同。' : ' These notes describe earlier versions of SayType and may not reflect the current app.'}</p>}
+              {Number(year) < 2026 && <p className="legacy-notice"><strong>{locale === 'zh' ? '历史版本。' : 'Historical releases.'}</strong>{locale === 'zh' ? '这些说明描述的是早期 TypeAloud，可能与当前应用不同。' : ' These notes describe earlier versions of TypeAloud and may not reflect the current app.'}</p>}
               {minors.map((minor) => (
                 <section className="release-series" key={minor} aria-labelledby={`series-${year}-${minor}`}>
                   <h3 id={`series-${year}-${minor}`}>{minor}{locale === 'zh' ? ' 系列' : ' series'}</h3>
@@ -69,7 +70,7 @@ function Milestones({ locale }: { locale: Locale }) {
     <div className="updates-layout">
       <aside className="updates-aside">
         <p className="updates-eyebrow">{locale === 'zh' ? '产品的每一步进展' : 'The bigger picture'}</p>
-        <p>{locale === 'zh' ? '了解 SayType 新增了哪些能力，以及它们从哪个版本开始提供。所有小改进和修复都记录在' : 'New capabilities and the releases that brought them to SayType. Small fixes and every patch live in the '}<a href={localizedPath('changelog', locale)}>{locale === 'zh' ? '完整更新日志中。' : 'complete changelog.'}</a></p>
+        <p>{locale === 'zh' ? '了解 TypeAloud 新增了哪些能力，以及它们从哪个版本开始提供。所有小改进和修复都记录在' : 'New capabilities and the releases that brought them to TypeAloud. Small fixes and every patch live in the '}<a href={localizedPath('changelog', locale)}>{locale === 'zh' ? '完整更新日志中。' : 'complete changelog.'}</a></p>
         <nav className="milestone-index" aria-label={locale === 'zh' ? '产品里程碑' : 'Product milestones'}>{milestones.map((milestone) => <a key={milestone.id} href={`#${milestone.id}`}>{milestone.category}</a>)}</nav>
       </aside>
       <div className="milestone-list">
@@ -113,14 +114,15 @@ export default function UpdatesPage({ page, locale = 'en' }: { page: 'updates' |
       <SiteHeader locale={locale} page={page} />
       <main id="main" tabIndex={-1}>
         <section className="updates-hero" aria-labelledby="updates-title">
-          <p className="updates-eyebrow">{locale === 'zh' ? 'SayType 的成长记录' : 'SayType, over time'}</p>
+          <p className="updates-eyebrow">{locale === 'zh' ? 'TypeAloud 的成长记录' : 'TypeAloud, over time'}</p>
           <h1 id="updates-title">{locale === 'zh' ? (page === 'updates' ? <>每次更新，<br /><span>让表达更轻松。</span></> : <>每个版本，<br /><span>每一处变化。</span></>) : (page === 'updates' ? <>A little closer to<br /><span>effortless.</span></> : <>Every release.<br /><span>Every detail.</span></>)}</h1>
-          <p>{locale === 'zh' ? (page === 'updates' ? '从语音到文字，记录让表达更顺畅、让内容留在身边的重要变化。' : '按版本完整记录 SayType 的新增功能、改进与修复。') : (page === 'updates' ? 'The meaningful changes to how you speak, write, and keep your words close.' : 'A complete record of what changed in SayType, one version at a time.')}</p>
+          <p>{locale === 'zh' ? (page === 'updates' ? '从语音到文字，记录让表达更顺畅、让内容留在身边的重要变化。' : '按版本完整记录 TypeAloud 的新增功能、改进与修复。') : (page === 'updates' ? 'The meaningful changes to how you speak, write, and keep your words close.' : 'A complete record of what changed in TypeAloud, one version at a time.')}</p>
           <nav className="updates-tabs" aria-label={locale === 'zh' ? '更新栏目' : 'Updates navigation'}><a href={localizedPath('updates', locale)} aria-current={page === 'updates' ? 'page' : undefined}>{locale === 'zh' ? '重要更新' : 'Product highlights'}</a><a href={localizedPath('changelog', locale)} aria-current={page === 'changelog' ? 'page' : undefined}>{locale === 'zh' ? '完整日志' : 'Full changelog'} <span>{releases.length}</span></a></nav>
         </section>
         {page === 'updates' ? <Milestones locale={locale} /> : <Changelog locale={locale} />}
       </main>
-      <footer className="updates-footer"><a href={localizedPath('home', locale)} className="updates-brand">SayType</a><p>{locale === 'zh' ? '你的声音，留在你的设备上。' : 'Your voice. On your device.'}</p><a href={`${localizedPath('home', locale)}#download`}>{locale === 'zh' ? '下载 SayType' : 'Get SayType'} <span aria-hidden="true">↗</span></a></footer>
+      <GuideLinks locale={locale} />
+      <footer className="updates-footer"><a href={localizedPath('home', locale)} className="updates-brand">TypeAloud</a><p>{locale === 'zh' ? '你的声音，留在你的设备上。' : 'Your voice. On your device.'}</p><a href={`${localizedPath('home', locale)}#download`}>{locale === 'zh' ? '下载 TypeAloud' : 'Get TypeAloud'} <span aria-hidden="true">↗</span></a></footer>
     </div>
   )
 }

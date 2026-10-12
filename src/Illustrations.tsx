@@ -17,13 +17,13 @@ function Typed({ text }: { text: string }) {
 
 const appsCopy = {
   en: {
-    label: 'Illustration: SayType inserts dictated text into whichever app has the cursor — an email, an AI assistant prompt, and a team chat.',
+    label: 'Illustration: TypeAloud inserts dictated text into whichever app has the cursor — an email, an AI assistant prompt, and a team chat.',
     mail: { title: 'New message', to: 'To', toValue: 'Maya Chen', subject: 'Subject', subjectValue: 'Contract', text: 'Thanks, Maya. I’ll send the signed contract this afternoon.' },
     ai: { title: 'Assistant', reply: 'Parser updated. Anything else?', text: 'Refactor this function but keep the error handling.' },
     chat: { title: 'design-review', first: 'Are you joining the review?', second: 'We’re starting in room 4.', text: 'On my way, 十分钟到！' },
   },
   zh: {
-    label: '示意图：光标在哪个应用，SayType 就把说出的文字输入到哪里——邮件、AI 助手的输入框、团队聊天。',
+    label: '示意图：光标在哪个应用，TypeAloud 就把说出的文字输入到哪里——邮件、AI 助手的输入框、团队聊天。',
     mail: { title: '新邮件', to: '收件人', toValue: 'Maya Chen', subject: '主题', subjectValue: '合同', text: '谢谢 Maya，合同我今天下午签好发你。' },
     ai: { title: 'AI 助手', reply: '解析器更新好了，还要改别的吗？', text: '重构这个函数，保留原来的 error handling。' },
     chat: { title: '设计评审', first: '你来参加评审吗？', second: '我们在 4 号会议室。', text: '马上到，十分钟！' },

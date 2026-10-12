@@ -25,7 +25,7 @@
     "category": "Local models",
     "introducedVersion": "v1.15.0",
     "summary": "Qwen3-ASR 1.7B arrived as an experimental option in v1.15.0. Qwen is now one engine with two sizes, 0.6B and 1.7B, with separate downloads and switching suggestions based on your machine’s dictation speed.",
-    "details": ["Keep dictating with 0.6B while 1.7B downloads; SayType switches when it is ready unless you have chosen another engine in the meantime.", "Returning to Qwen restores the size you last used. Once both sizes are downloaded, you can switch directly from Home."],
+    "details": ["Keep dictating with 0.6B while 1.7B downloads; TypeAloud switches when it is ready unless you have chosen another engine in the meantime.", "Returning to Qwen restores the size you last used. Once both sizes are downloaded, you can switch directly from Home."],
     "scope": "1.7B is now described as the larger model option rather than experimental. Suggestions use measured dictation speed on your machine, not a promise of equal performance across devices.",
     "evolution": [{"version": "v1.15.8", "description": "Click a ready engine to activate it, or use its separate expand control to inspect settings without switching. Cloud model changes apply within the active engine."}, {"version": "v1.17.0", "description": "Qwen became one engine with two sizes, gained switching suggestions based on measured speed, and dropped the experimental label for 1.7B."}, {"version": "v1.17.1", "description": "Compact Home controls show Qwen’s size with a quick switch; computer and cloud icons distinguish local and cloud engines."}]
   },
@@ -64,7 +64,7 @@
     "title": "Retry a saved recording instead of saying it again.",
     "category": "Recovery",
     "introducedVersion": "v1.8.0",
-    "summary": "Recovery first arrived for stalled local transcription: SayType retries once and, if it still cannot complete, saves the recording as a pending History entry for another attempt.",
+    "summary": "Recovery first arrived for stalled local transcription: TypeAloud retries once and, if it still cannot complete, saves the recording as a pending History entry for another attempt.",
     "details": ["Later releases expanded saved-audio recovery to more transcription failures and improved the reasons shown in History.", "A manual retry uses the engine currently selected, so changing provider or correcting an API key can make the saved recording usable."],
     "scope": "Retry requires successfully saved audio. History has a 100-entry limit; saved recordings are not a permanent backup.",
     "evolution": [{"version": "v1.13.3", "description": "More failed requests retain audio and an error reason; retry uses the current engine and successful retries replace pending entries."}, {"version": "v1.13.4", "description": "Empty retry results preserve the recording, and cloud or translation failures with incomplete capture no longer miss their History entry."}]
@@ -84,7 +84,7 @@
     "title": "New versions, without another installer hunt.",
     "category": "App updates",
     "introducedVersion": "v1.4.0",
-    "summary": "Background update checks and in-app installation arrived with v1.4.0. SayType checks daily, downloads an available update, and lets you choose when to restart.",
+    "summary": "Background update checks and in-app installation arrived with v1.4.0. TypeAloud checks daily, downloads an available update, and lets you choose when to restart.",
     "details": ["You can also check for updates from Settings.", "Installing an update remains an explicit action rather than an automatic restart during your work."],
     "scope": "This describes the built-in updater in official desktop releases.",
     "evolution": [{"version": "v1.15.6", "description": "The Home update card gained a What’s new link to that version’s GitHub release notes, so you can review changes before restarting."}]
@@ -94,7 +94,7 @@
     "title": "Dictation that can stay on your device.",
     "category": "Local transcription",
     "introducedVersion": "v1.4.0",
-    "summary": "Qwen3-ASR brought on-device speech recognition to SayType. After downloading the model, local transcription can run without an account, API key or network connection.",
+    "summary": "Qwen3-ASR brought on-device speech recognition to TypeAloud. After downloading the model, local transcription can run without an account, API key or network connection.",
     "details": ["Model download, progress and removal became available in Settings, alongside a choice between local and cloud transcription.", "The next release made local setup more prominent on Apple Silicon and added quicker engine switching from Home and the menu bar."],
     "scope": "Introduced for Mac, with Apple Silicon recommended for local use. Optional Groq/OpenAI transcription uploads audio to the selected provider; translate mode has been removed.",
     "evolution": [{"version": "v1.5.0", "description": "Apple Silicon onboarding began leading with the local model, with Home and tray shortcuts for changing engines."}, {"version": "v1.6.0", "description": "Local decoding gained a visible word-by-word progress preview after recording. This is not the live recognition introduced later with Nemotron."}, {"version": "v1.16.0", "description": "Translate mode was removed, and Shift+Alt became a regular recording shortcut."}]

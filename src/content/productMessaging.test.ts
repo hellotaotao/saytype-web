@@ -11,8 +11,8 @@ describe('productMessaging', () => {
     expect(productMessaging.hero.secondaryCta).toBe('See how it works')
   })
 
-  it('names SayType consistently and describes the current desktop reality', () => {
-    expect(productMessaging.productName).toBe('SayType')
+  it('names TypeAloud consistently and describes the current desktop reality', () => {
+    expect(productMessaging.productName).toBe('TypeAloud')
     expect(productMessaging.currentReality).toContain('Tauri')
     expect(productMessaging.currentReality).toContain('Qwen3')
     expect(productMessaging.currentReality).toContain('Groq')
