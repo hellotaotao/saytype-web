@@ -10,6 +10,7 @@ import DownloadButton from './DownloadButton'
 import DictationDemo from './DictationDemo'
 import { AppsScene, BenefitIcon, StepScene } from './Illustrations'
 import { releasePageUrl } from './downloads'
+import { useDownload } from './useDownload'
 const workflowSteps = [
   {
     number: '01',
@@ -124,7 +125,6 @@ function WorkflowSection({ locale }: { locale: Locale }) {
   return (
     <section className="workflow-section" id="workflow" aria-labelledby="workflow-title">
       <div className="section-kicker">
-        <span>02</span>
         <span>{t('How it works')}</span>
       </div>
       <div className="workflow-heading reveal-target">
@@ -154,7 +154,6 @@ function ProductSection({ locale }: { locale: Locale }) {
   return (
     <section className="product-section" id="product" aria-labelledby="product-title">
       <div className="section-kicker">
-        <span>03</span>
         <span>{t('The product')}</span>
       </div>
       <div className="product-layout">
@@ -196,7 +195,6 @@ function ProductSection({ locale }: { locale: Locale }) {
           ))}
         </ul>
       </div>
-      <p className="product-note">{t('Change your input device in your operating system’s sound settings. Updates download in the background. Restart when you’re ready.')}</p>
     </section>
   )
 }
@@ -212,7 +210,6 @@ function PrivacySection({ locale }: { locale: Locale }) {
   return (
     <section className="privacy-section" id="privacy" aria-labelledby="privacy-title">
       <div className="section-kicker">
-        <span>01</span>
         <span>{t('Why local matters')}</span>
       </div>
       <div className="privacy-layout reveal-target">
@@ -240,13 +237,33 @@ function PrivacySection({ locale }: { locale: Locale }) {
   )
 }
 
+const platforms = [
+  { id: 'macos', name: 'macOS', status: 'Primary tested platform', icon: 'apple', downloadLabel: 'Download SayType for Mac' },
+  { id: 'windows', name: 'Windows', status: 'Experimental', icon: 'windows', downloadLabel: 'Download SayType for Windows' },
+  { id: 'linux', name: 'Linux', status: 'Experimental', icon: 'linux', downloadLabel: 'Download SayType for Linux' },
+] as const
+
+function PlatformCard({ platform, locale }: { platform: (typeof platforms)[number]; locale: Locale }) {
+  const t = homeCopy(locale)
+  const { href, onClick, isResolving } = useDownload(platform.id)
+
+  return (
+    <li className={`platform-card platform-${platform.id}`}>
+      <span className="platform-glyph" aria-hidden="true">
+        {platform.icon === 'apple' ? <svg viewBox="0 0 48 48"><path d="M33 25c0-5 4-7.5 4.2-7.7-2.3-3.4-5.9-3.9-7.2-4-3-.3-5.8 1.8-7.3 1.8-1.6 0-4-1.7-6.6-1.6-3.4.1-6.5 2-8.2 5-3.5 6-.9 14.8 2.5 19.7 1.6 2.4 3.5 5 6.1 4.9 2.4-.1 3.3-1.6 6.3-1.6s3.8 1.6 6.4 1.5c2.7-.1 4.4-2.4 5.9-4.8 1.9-2.8 2.6-5.6 2.6-5.7-.1 0-4.7-1.8-4.7-7.5ZM28.2 10.2c1.3-1.6 2.2-3.9 1.9-6.2-1.9.1-4.3 1.3-5.6 2.9-1.2 1.4-2.3 3.8-2 6 2.1.2 4.3-1.1 5.7-2.7Z" /></svg> : platform.icon === 'windows' ? <svg viewBox="0 0 48 48"><path d="M4 9 21 6v17H4V9Zm20-3 20-3v20H24V6ZM4 25h17v17L4 39V25Zm20 0h20v20l-20-3V25Z" /></svg> : <svg viewBox="0 0 48 48"><path d="M24 5c-8 0-13 7-13 17v8c-3 2-4 6-2 9 2 3 8 2 10-1 3 2 7 2 10 0 2 3 8 4 10 1 2-3 1-7-2-9v-8C37 12 32 5 24 5Zm-6 17a2 2 0 1 1 0-4 2 2 0 0 1 0 4Zm12 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4ZM18 29h12l-2 5h-8l-2-5Z" /></svg>}
+      </span>
+      <h3>{platform.name}</h3>
+      <span className="platform-status">{t(platform.status)}</span>
+      <a className="platform-download" href={href} onClick={onClick} aria-busy={isResolving || undefined} aria-label={t(platform.downloadLabel)}>
+        {isResolving ? t('Preparing download…') : t('Download')}
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12m0 0 5-5m-5 5-5-5M5 20h14" /></svg>
+      </a>
+    </li>
+  )
+}
+
 function PlatformSection({ locale }: { locale: Locale }) {
   const t = homeCopy(locale)
-  const platforms = [
-    { id: 'macos', name: 'macOS', status: 'Primary tested platform', icon: 'apple' },
-    { id: 'windows', name: 'Windows', status: 'Experimental', icon: 'windows' },
-    { id: 'linux', name: 'Linux', status: 'Experimental', icon: 'linux' },
-  ] as const
 
   return (
     <section className="platform-section" id="platforms" aria-labelledby="platform-title">
@@ -257,13 +274,7 @@ function PlatformSection({ locale }: { locale: Locale }) {
       </div>
       <ul className="platform-grid">
         {platforms.map((platform) => (
-          <li className={`platform-card platform-${platform.id}`} key={platform.id}>
-            <span className="platform-glyph" aria-hidden="true">
-              {platform.icon === 'apple' ? <svg viewBox="0 0 48 48"><path d="M33 25c0-5 4-7.5 4.2-7.7-2.3-3.4-5.9-3.9-7.2-4-3-.3-5.8 1.8-7.3 1.8-1.6 0-4-1.7-6.6-1.6-3.4.1-6.5 2-8.2 5-3.5 6-.9 14.8 2.5 19.7 1.6 2.4 3.5 5 6.1 4.9 2.4-.1 3.3-1.6 6.3-1.6s3.8 1.6 6.4 1.5c2.7-.1 4.4-2.4 5.9-4.8 1.9-2.8 2.6-5.6 2.6-5.7-.1 0-4.7-1.8-4.7-7.5ZM28.2 10.2c1.3-1.6 2.2-3.9 1.9-6.2-1.9.1-4.3 1.3-5.6 2.9-1.2 1.4-2.3 3.8-2 6 2.1.2 4.3-1.1 5.7-2.7Z" /></svg> : platform.icon === 'windows' ? <svg viewBox="0 0 48 48"><path d="M4 9 21 6v17H4V9Zm20-3 20-3v20H24V6ZM4 25h17v17L4 39V25Zm20 0h20v20l-20-3V25Z" /></svg> : <svg viewBox="0 0 48 48"><path d="M24 5c-8 0-13 7-13 17v8c-3 2-4 6-2 9 2 3 8 2 10-1 3 2 7 2 10 0 2 3 8 4 10 1 2-3 1-7-2-9v-8C37 12 32 5 24 5Zm-6 17a2 2 0 1 1 0-4 2 2 0 0 1 0 4Zm12 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4ZM18 29h12l-2 5h-8l-2-5Z" /></svg>}
-            </span>
-            <h3>{platform.name}</h3>
-            <span className="platform-status">{t(platform.status)}</span>
-          </li>
+          <PlatformCard key={platform.id} platform={platform} locale={locale} />
         ))}
       </ul>
     </section>
@@ -288,6 +299,7 @@ function DownloadSection({ locale }: { locale: Locale }) {
           <p>{t('Qwen3-ASR 0.6B is the recommended local model, with a ~1 GB one-time download. Qwen3-ASR 1.7B and Nemotron live transcription are experimental options. The larger Qwen model needs a ~2.52 GB download; performance varies with your hardware.')}</p>
         </details>
         <DownloadButton locale={locale} />
+        <a className="download-other" href="#platforms">{t('On Windows or Linux? See all platforms')}</a>
       </div>
     </section>
   )

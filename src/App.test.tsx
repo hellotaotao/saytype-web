@@ -106,13 +106,12 @@ describe('SayType launch page', () => {
     expect(html).not.toContain('Available transcription engines')
   })
 
-  it('explains translation, experimental models and updates', () => {
+  it('explains translation and experimental models', () => {
     const html = renderToStaticMarkup(<App />)
     expect(html).toContain('Shift+Alt')
     expect(html).toContain('English')
     expect(html).toContain('Nemotron')
     expect(html).toContain('experimental')
-    expect(html).toContain('Restart when you’re ready.')
     expect(html).not.toContain('Local by default')
   })
 

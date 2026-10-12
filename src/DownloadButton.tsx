@@ -1,14 +1,9 @@
-import { useEffect, useState, type MouseEvent } from 'react'
+import { useEffect, useState } from 'react'
 import { homeCopy, type HomeCopyKey } from './content/homeCopy'
 import type { Locale } from './i18n'
 import './DownloadButton.css'
-import {
-  detectDownloadPlatform,
-  getFallbackDownloadUrl,
-  releasePageUrl,
-  resolveLatestDownloadUrl,
-  type DownloadPlatform,
-} from './downloads'
+import { detectDownloadPlatform, type DownloadPlatform } from './downloads'
+import { useDownload } from './useDownload'
 
 const downloadPlatforms = {
   macos: { label: 'Download for Mac', name: 'Mac' },
@@ -33,32 +28,9 @@ export default function DownloadButton({ locale, label: customLabel }: { locale:
   const t = homeCopy(locale)
   const [platform, setPlatform] = useState<DownloadPlatform | null>('macos')
   useEffect(() => { setPlatform(getCurrentDownloadPlatform()) }, [])
-  const [isResolving, setIsResolving] = useState(false)
+  const { href, onClick, isResolving } = useDownload(platform)
   const platformDetails = platform ? downloadPlatforms[platform] : null
   const label = t(customLabel ?? platformDetails?.label ?? 'View downloads')
-  const href = platform ? getFallbackDownloadUrl(platform) : releasePageUrl
-
-  const handleClick = async (event: MouseEvent<HTMLAnchorElement>) => {
-    if (
-      !platform ||
-      event.button !== 0 ||
-      event.metaKey ||
-      event.ctrlKey ||
-      event.shiftKey ||
-      event.altKey
-    ) {
-      return
-    }
-
-    event.preventDefault()
-    if (isResolving) {
-      return
-    }
-
-    setIsResolving(true)
-    const downloadUrl = await resolveLatestDownloadUrl(platform)
-    window.location.assign(downloadUrl)
-  }
 
   return (
     <a
@@ -68,7 +40,7 @@ export default function DownloadButton({ locale, label: customLabel }: { locale:
         [customLabel ? t(customLabel) : null, t(platformDetails ? `Download SayType for ${platformDetails.name}` : 'View SayType downloads')].filter(Boolean).join(' — ')
       }
       aria-busy={isResolving || undefined}
-      onClick={handleClick}
+      onClick={onClick}
     >
       {platform === 'macos' ? (
         <img src="/apple-logo.png" alt="" width="26" height="27" />

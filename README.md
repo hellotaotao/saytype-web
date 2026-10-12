@@ -33,16 +33,14 @@ All six routes reuse `src/SiteHeader.tsx` with identical navigation and download
 
 Chinese milestones live in `src/content/milestones.zh.json` and share IDs and source versions with the English milestones. Chinese release history displays upstream Chinese notes first with English originals in a disclosure. The two English-only legacy releases use explicitly labeled website translations from `src/content/release-translations.zh.json`. Future English-only releases show an explicit fallback notice; raw release bodies remain unchanged. Real product screenshots retain the language in which they were captured.
 
-## Product screenshots
+## Product visuals
 
-Native captures of installed SayType **v1.15.2**, captured **2026-09-15**, in English/light appearance:
+The home page no longer embeds app screenshots. Its product visuals are drawn in CSS and scale as one image:
 
-- `public/saytype-settings.png` — Dictation Settings, **1152 x 768**; used by both hero layouts. Configuration drawers collapsed, no API keys or private transcript text visible.
-- `public/saytype-app-settings.png` — App Settings, **1152 x 768**; used in the product section.
+- `src/DictationDemo.tsx` — the looping hold / speak / release demo in the hero (shown under the workflow heading below 900px). The floating prompt follows the app's `input-prompt.css`.
+- `src/Illustrations.tsx` — the any-app cards in the product section, the three workflow step tiles and the local-benefit icons.
 
-These are actual app pixels, not AI-generated UI reconstructions. Both are displayed at their original **3:2** aspect ratio with no crop, and link to the full-size image. The previously shortened Home capture is not used. Native captures may require PNG format conversion; do not redraw, retouch, or squash the interface.
-
-The existing SayType logo, Apple logo and diagonal coral/cyan waveform are reused. `public/saytype-stage-wave.webp` is a generated decorative ribbon matching the second concept, compressed to WebP and loaded only by that preview. No product screenshot is generated. The concept-image text "Local by default" was corrected to "Local transcription" because the published configuration does not always default to local mode.
+Every scene rests on a complete static frame when `prefers-reduced-motion` is set. `public/og-image.jpg` is a 1200 x 630 capture of the hero used for link previews; recapture it when the hero changes.
 
 ## Implementation
 
