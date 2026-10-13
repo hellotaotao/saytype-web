@@ -4,6 +4,10 @@
   "outputDirectory": "dist",
   "cleanUrls": true,
   "trailingSlash": false,
+  "regions": ["iad1"],
+  "functions": {
+    "api/polish.js": { "maxDuration": 15 }
+  },
   "redirects": [
     {
       "source": "/:path*",
@@ -13,6 +17,7 @@
     }
   ],
   "rewrites": [
+    { "source": "/v1/polish", "destination": "/api/polish" },
     {
       "source": "/download/:path*",
       "destination": "https://649ogrnzpi9dgfiw.public.blob.vercel-storage.com/:path*"

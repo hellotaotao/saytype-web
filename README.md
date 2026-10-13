@@ -95,3 +95,7 @@ npm run updates:draft -- --baseline /tmp/saytype-releases-before.json
 Only added/revised release notes plus the existing curated milestones are sent to the API. The command writes review-only proposals into `content-drafts/updates.json`; it never edits published milestones. It validates source versions, existing milestone IDs, schema and coverage. Review each proposed introduction against older releases before adding a new milestone. To publish a reviewed proposal, edit `src/content/milestones.json` and its matching Chinese entries in `src/content/milestones.zh.json`, remove the consumed draft, and run the validation commands above. AI failures do not block release-note synchronization; no API call occurs when nothing changed.
 
 After starting the production preview, run `npm run test:http -- http://127.0.0.1:4186` (use your preview port) to verify actual route responses. This catches SPA fallback responses that look correct after JavaScript but initially serve homepage metadata instead of release content.
+
+## Polish relay
+
+`POST /v1/polish` (`api/polish.js`, `relay/`) forwards dictated text from the app to the polish model and returns the cleaned text. It stores counters only, never text. See [relay/README.md](relay/README.md).
