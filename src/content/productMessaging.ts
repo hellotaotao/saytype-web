@@ -225,11 +225,6 @@ export const productMessaging: ProductMessaging = {
       description: 'Turn speech into text on your Mac. In local mode, your audio and transcript stay on your device.',
     },
     {
-      id: 'translation',
-      title: 'Speak it. Write it in English.',
-      description: 'Hold Shift+Alt to translate speech into English through a cloud provider using your own API key.',
-    },
-    {
       id: 'microphone-choice',
       title: 'Uses your system’s default microphone',
       description: 'Change your input device in your operating system’s sound settings.',
@@ -296,12 +291,12 @@ export const productMessaging: ProductMessaging = {
     {
       name: 'Groq',
       models: ['whisper-large-v3', 'whisper-large-v3-turbo'],
-      note: 'Whisper models for fast speech-to-text and translation-mode support.',
+      note: 'Whisper models for fast speech-to-text.',
     },
     {
       name: 'OpenAI',
       models: ['gpt-transcribe'],
-      note: 'The current transcription choice in Settings. English translation uses whisper-1.',
+      note: 'The current transcription choice in Settings.',
     },
   ],
   workflowExample: {

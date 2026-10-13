@@ -68,7 +68,7 @@ const chinese = {
   'Release': '松开',
   'Your transcript returns to the text field that already has focus.': '转写完成后，文字自动填入当前聚焦的输入框。',
   'On-device transcription': '设备端转写',
-  'Optional cloud translation': '可选云端翻译',
+  'Optional cloud transcription': '可选云端转写',
   'Local History & retry': '本地历史记录与重试',
   'The product': '产品功能',
   'Ready when you are. Invisible when you’re not.': '随时待命，不打扰工作。',
@@ -85,7 +85,6 @@ const chinese = {
   '100% local transcription': '100% 本地转写',
   'Turn speech into text on your Mac. In local mode, your audio and transcript stay on your device.': '在你的 Mac 上把语音转成文字。本地模式下，音频和转写文字都留在设备上。',
   'Speak it. Write it in English.': '说出想法，写成英文。',
-  'Hold Shift+Alt to translate speech into English through a cloud provider using your own API key.': '按住 Shift+Alt，使用你自己的 API key，通过云端服务将语音翻译成英文。',
   'Which local engine should I choose?': '我该选哪个本地引擎？',
   'Qwen3-ASR 0.6B is the recommended local model, with a ~1 GB one-time download. Qwen3-ASR 1.7B and Nemotron live transcription are experimental options. The larger Qwen model needs a ~2.52 GB download; performance varies with your hardware.': '推荐使用 Qwen3-ASR 0.6B 本地模型，首次需下载约 1 GB。Qwen3-ASR 1.7B 和 Nemotron 实时转写属于实验性选项。更大的 Qwen 模型需下载约 2.52 GB；实际性能取决于硬件。',
   'Your transcript, saved locally': '转写文字，保存在本地',
@@ -111,8 +110,7 @@ const chinese = {
   'Local transcription needs no account or API key. No weekly allowance and no per-minute service fees.': '本地转写无需账号或 API key，没有每周额度，也没有按分钟收取的服务费。',
   'Transcribe first. Edit on your terms.': '先转成文字，再由你决定怎么改。',
   'Get your words as text. You decide whether to rewrite them, which tool to use, and what to share.': '先把你说的话转成文字。是否改写、使用什么工具、分享哪些内容，都由你决定。',
-  'Optional cloud transcription and translation send audio to Groq or OpenAI using your own API key. Provider charges may apply.': '可选的云端转写和翻译会使用你自己的 API key，将音频发送给 Groq 或 OpenAI。服务商可能收取费用。',
-  'Hold Shift+Alt to turn speech into English through a cloud provider. In local mode, translation setup asks for your consent before sending audio.': '按住 Shift+Alt，通过云端服务将语音翻译成英文。在本地模式下，翻译设置会先征得你的同意，再发送音频。',
+  'Optional cloud transcription sends audio to Groq or OpenAI using your own API key. Provider charges may apply.': '可选的云端转写会使用你自己的 API key，将音频发送给 Groq 或 OpenAI。服务商可能收取费用。',
   'macOS is the primary tested path. Windows and Linux builds remain experimental.': 'macOS 是主要经过测试的平台。Windows 和 Linux 版本仍处于实验阶段。',
   'Offline dictation. No account. No subscription.': '离线听写，无需账号，无需订阅。',
   'Local transcription. No cloud needed.': '本地转写，无需云端。',
@@ -124,6 +122,7 @@ const chinese = {
   'Back to top': '返回顶部',
   'Voice to text. On your device.': '语音转文字，就在你的设备上。',
   'GitHub releases ↗': 'GitHub 发布记录 ↗',
+  'Open source on GitHub ↗': '开源 · GitHub ↗',
 }
 
 export type HomeCopyKey = keyof typeof chinese

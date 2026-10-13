@@ -8,7 +8,7 @@ import SiteHeader from './SiteHeader'
 import DownloadButton from './DownloadButton'
 import DictationDemo from './DictationDemo'
 import { AppsScene, BenefitIcon, StepScene } from './Illustrations'
-import { releasePageUrl } from './downloads'
+import { releasePageUrl, sourceRepoUrl } from './downloads'
 import { useDownload } from './useDownload'
 import GuideLinks from './landing/GuideLinks'
 const workflowSteps = [
@@ -136,7 +136,7 @@ function WorkflowSection({ locale }: { locale: Locale }) {
           </li>
         ))}
       </ol>
-      <p className="workflow-footnote">{t('On-device transcription')} <span>{t('Optional cloud translation')}</span> {t('Local History & retry')}</p>
+      <p className="workflow-footnote">{t('On-device transcription')} <span>{t('Optional cloud transcription')}</span> {t('Local History & retry')}</p>
     </section>
   )
 }
@@ -170,8 +170,7 @@ function ProductSection({ locale }: { locale: Locale }) {
       </div>
       <details className="model-details cloud-options">
         <summary>{t('Optional cloud features')}</summary>
-        <p className="cloud-disclosure">{t('Optional cloud transcription and translation send audio to Groq or OpenAI using your own API key. Provider charges may apply.')}</p>
-        <p className="translation-note">{t('Hold Shift+Alt to turn speech into English through a cloud provider. In local mode, translation setup asks for your consent before sending audio.')}</p>
+        <p className="cloud-disclosure">{t('Optional cloud transcription sends audio to Groq or OpenAI using your own API key. Provider charges may apply.')}</p>
       </details>
       <div className="product-reassurance reveal-target">
         <div className="history-reassurance">
@@ -308,6 +307,7 @@ function SiteFooter({ locale }: { locale: Locale }) {
       <p>{t('Voice to text. On your device.')}</p>
       <a href={localizedPath('updates', locale)}>{t('Updates')}</a>
       <a href={releasePageUrl}>{t('GitHub releases ↗')}</a>
+      <a href={sourceRepoUrl}>{t('Open source on GitHub ↗')}</a>
     </footer>
   )
 }

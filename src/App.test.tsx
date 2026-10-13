@@ -79,7 +79,7 @@ describe('TypeAloud launch page', () => {
     const html = renderToStaticMarkup(<App />)
 
     expect(html).toContain(
-      'Optional cloud transcription and translation send audio to Groq or OpenAI using your own API key. Provider charges may apply.',
+      'Optional cloud transcription sends audio to Groq or OpenAI using your own API key. Provider charges may apply.',
     )
   })
 
@@ -94,10 +94,9 @@ describe('TypeAloud launch page', () => {
     expect(html).not.toContain('Available transcription engines')
   })
 
-  it('explains translation and experimental models', () => {
+  it('explains experimental models and no longer advertises translation', () => {
     const html = renderToStaticMarkup(<App />)
-    expect(html).toContain('Shift+Alt')
-    expect(html).toContain('English')
+    expect(html).not.toContain('Shift+Alt')
     expect(html).toContain('Nemotron')
     expect(html).toContain('experimental')
     expect(html).not.toContain('Local by default')

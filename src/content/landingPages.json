@@ -287,7 +287,7 @@
           {
             "heading": "What still uses the network",
             "body": [
-              "Three things: the first model download, app updates, and the cloud features if you turn them on. Cloud transcription and English translation are optional, use your own Groq or OpenAI key and send audio to that provider."
+              "Three things: the first model download, app updates, and the cloud features if you turn them on. Cloud transcription is optional, uses your own Groq or OpenAI key and sends audio to that provider."
             ]
           },
           {
@@ -340,7 +340,7 @@
           {
             "heading": "哪些地方仍然会用到网络",
             "body": [
-              "只有三处：第一次下载模型、应用更新，以及你主动开启的云端功能。云端转写和英文翻译都是可选的，使用你自己的 Groq 或 OpenAI key，音频会发送给对应的服务商。"
+              "只有三处：第一次下载模型、应用更新，以及你主动开启的云端功能。云端转写是可选的，使用你自己的 Groq 或 OpenAI key，音频会发送给对应的服务商。"
             ]
           },
           {
@@ -394,12 +394,6 @@
             ]
           },
           {
-            "heading": "Translate into English when you need to",
-            "body": [
-              "Hold Shift+Alt instead and TypeAloud writes what you said in English. Translation runs through a cloud provider with your own API key, so it is optional and separate from the offline local mode."
-            ]
-          },
-          {
             "heading": "Free, on your device",
             "body": [
               "Local transcription needs no account, subscription or API key, and has no word limit. Audio is processed on your Mac. Apple Silicon is recommended."
@@ -421,7 +415,7 @@
           },
           {
             "q": "Does it work offline?",
-            "a": "Local transcription works offline after a one-time model download of about 1 GB. Translation needs a cloud provider."
+            "a": "Local transcription works offline after a one-time model download of about 1 GB."
           }
         ]
       },
@@ -447,12 +441,6 @@
             ]
           },
           {
-            "heading": "需要时直接出英文",
-            "body": [
-              "改为按住 Shift+Alt，TypeAloud 会把你说的话写成英文。翻译通过云端服务商完成，使用你自己的 API key，所以它是可选功能，和离线的本地模式互不影响。"
-            ]
-          },
-          {
             "heading": "免费，在你的设备上运行",
             "body": [
               "本地转写不需要账号、订阅或 API key，也没有字数限制。音频在你的 Mac 上处理，推荐 Apple Silicon 芯片。"
@@ -474,7 +462,7 @@
           },
           {
             "q": "能离线使用吗？",
-            "a": "本地转写在下载一次约 1 GB 的模型后即可离线使用。翻译需要云端服务商。"
+            "a": "本地转写在下载一次约 1 GB 的模型后即可离线使用。"
           }
         ]
       }

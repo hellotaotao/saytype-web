@@ -6,7 +6,7 @@ Product marketing homepage for TypeAloud, a Tauri desktop voice input app. macOS
 
 The homepage leads with local transcription, no account and no subscription. Both languages present local benefits before the short workflow; optional cloud features are disclosed below the primary pitch. Download prerequisites appear before the final download action. These claims apply to local transcription, not optional cloud services.
 
-Hold `Ctrl+Shift`, speak, release: TypeAloud transcribes with the configured engine and inserts text at the cursor. `Escape` cancels. Local Qwen3 transcription needs no account or API key after the model download. Optional Groq/OpenAI transcription and English translation upload audio to the configured provider using the user's own key; provider charges may apply.
+Hold `Ctrl+Shift`, speak, release: TypeAloud transcribes with the configured engine and inserts text at the cursor. `Escape` cancels. Local Qwen3 transcription needs no account or API key after the model download. Optional Groq/OpenAI transcription uploads audio to the configured provider using the user's own key; provider charges may apply.
 
 Copy is checked against `../SayType` at tag `v1.15.2`, especially `README.md`, `docs/local-asr.md`, `docs/cloud-transcription.md`, `docs/dictation-recovery.md`, the Settings UI, and the updater implementation. Hardware-aware onboarding/default changes in the desktop working tree are not advertised as released behavior.
 
@@ -14,7 +14,6 @@ Copy is checked against `../SayType` at tag `v1.15.2`, especially `README.md`, `
 - Qwen3-ASR 0.6B is the recommended local model (~1 GB download). Qwen3-ASR 1.7B (~2.52 GB) and Nemotron live transcription are experimental.
 - Apple Silicon is recommended for local dictation, not a universal installation requirement.
 - History stores completed transcripts for copying. Failed transcription can be retried with the current engine when its audio was saved.
-- Hold `Shift+Alt` for English cloud translation. Local-mode translation setup asks for consent.
 - Updates download in the background; the user chooses when to restart.
 - Microphone and macOS Accessibility permissions are required for the complete macOS workflow.
 
