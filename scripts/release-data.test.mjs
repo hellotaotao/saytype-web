@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { normalizeReleases, fetchAllReleases, changedReleases, validateSnapshotUpdate } from './release-data.mjs';
 
 const item = (tag = 'v1.2.0', body = '## Fixes\n- Keeps saved audio.') => ({
-  tag_name: tag, body, html_url: `https://github.com/hellotaotao/saytype/releases/tag/${tag}`,
+  tag_name: tag, body, html_url: `https://github.com/hellotaotao/typealoud/releases/tag/${tag}`,
   published_at: '2026-09-01T10:00:00Z', updated_at: '2026-09-02T10:00:00Z', draft: false, prerelease: false,
 });
 

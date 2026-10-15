@@ -13,8 +13,8 @@ interface ReleaseResponse {
 type FetchRelease = (url: string) => Promise<ReleaseResponse>
 
 export const latestReleaseApiUrl =
-  'https://api.github.com/repos/hellotaotao/saytype/releases/latest'
-export const releasePageUrl = 'https://github.com/hellotaotao/saytype/releases/latest'
+  'https://api.github.com/repos/hellotaotao/typealoud/releases/latest'
+export const releasePageUrl = 'https://github.com/hellotaotao/typealoud/releases/latest'
 export const sourceRepoUrl = 'https://github.com/hellotaotao/typealoud'
 
 // The mainland-China mirror: TypeAloud's release workflow copies each release's

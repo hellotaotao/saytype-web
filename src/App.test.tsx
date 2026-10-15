@@ -58,7 +58,7 @@ describe('TypeAloud launch page', () => {
     expect(html).toContain('aria-label="Primary navigation"')
     expect(html).toContain('aria-label="Download TypeAloud for Mac"')
     expect(html).toContain(
-      'href="https://github.com/hellotaotao/saytype/releases/latest"',
+      'href="https://github.com/hellotaotao/typealoud/releases/latest"',
     )
     expect(html).toContain('aria-labelledby="workflow-title"')
     expect(html).toContain('aria-labelledby="privacy-title"')

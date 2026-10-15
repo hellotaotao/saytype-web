@@ -1,4 +1,4 @@
-export const repository = 'hellotaotao/saytype';
+export const repository = 'hellotaotao/typealoud';
 const releaseBase = `https://github.com/${repository}/releases/tag/`;
 const placeholder = /^(?:下载下方的\s*\.dmg\s*安装。?|下载对应平台的安装包。?|Download the installer for your platform\.?)$/i;
 
