@@ -48,7 +48,7 @@ describe('Chinese updates pages', () => {
     const html = renderToStaticMarkup(<UpdatesPage page="updates" locale="zh" />)
     for (const text of ['跟得上你的录音', '首次推出', '后续改进', '2026年9月18日', '重要更新', '完整日志', '跳至正文', '网站语言']) expect(html).toContain(text)
     for (const href of ['/zh', '/zh/updates', '/zh/changelog', '/zh#download', '/zh/changelog#v1.2.0']) expect(html).toContain(`href="${href}"`)
-    expect(html).toContain('src="/saytype-icon.png"')
+    expect(html).toContain('src="/typealoud-icon.png"')
     expect(html).toContain('href="/updates"')
     expect(html).not.toContain('First introduced')
   })

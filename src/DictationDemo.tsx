@@ -39,7 +39,7 @@ export default function DictationDemo({ locale }: { locale: Locale }) {
             <img className="dd-apple" src="/apple-logo.png" alt="" width="26" height="27" />
             <strong>{copy.app}</strong>
             {copy.menu.map((item) => <span key={item}>{item}</span>)}
-            <img src="/saytype-icon.png" alt="" width="42" height="42" />
+            <img src="/typealoud-icon.png" alt="" width="42" height="42" />
             <time>9:41</time>
           </div>
           <div className="dd-window">

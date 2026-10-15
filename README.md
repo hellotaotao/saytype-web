@@ -72,7 +72,7 @@ Competitor prices, limits and platforms are quoted from the official pages liste
 Requires Node 22 or later. `GH_TOKEN` / `GITHUB_TOKEN` is optional for public reads but avoids low unauthenticated API limits.
 
 ```bash
-cp src/content/releases.json /tmp/saytype-releases-before.json
+cp src/content/releases.json /tmp/typealoud-releases-before.json
 npm run releases:sync
 # Offline import of an unmodified GitHub Releases API JSON array:
 npm run releases:sync -- --from-file /path/to/releases.json
@@ -80,7 +80,7 @@ npm run releases:sync -- --from-file /path/to/releases.json
 
 The importer paginates, excludes drafts/prereleases, detects revised notes, and writes atomically only after successful validation. A partial fetch, missing previously published release, or replacement of real notes by a placeholder fails without overwriting the snapshot. Resolve actual upstream removals manually. A missing note on a new release remains a visible gap; a later sync imports its completed body.
 
-`.github/workflows/sync-releases.yml` checks daily, can be dispatched manually, and accepts `repository_dispatch` with event type `saytype-release-notes-ready`. For immediate updates, send that event from the desktop release pipeline **after** its `gh release edit --notes-file` succeeds, using a token with access to this website repository. The daily check is the fallback for late/edited notes. No desktop-pipeline credentials or remote configuration are created by this change.
+`.github/workflows/sync-releases.yml` checks daily, can be dispatched manually, and accepts `repository_dispatch` with event type `typealoud-release-notes-ready`. For immediate updates, send that event from the desktop release pipeline **after** its `gh release edit --notes-file` succeeds, using a token with access to this website repository. The daily check is the fallback for late/edited notes. No desktop-pipeline credentials or remote configuration are created by this change.
 
 The workflow opens a single content PR rather than publishing automatically. Enable GitHub Actions' **Allow GitHub Actions to create and approve pull requests** repository setting for PR creation. It preserves an open review PR without overwriting reviewer edits; after merging or closing it, the next run catches up. The branch is reserved for this workflow. There is no automatic merge. Website deployment follows the repository's existing deployment process after an approved merge.
 
@@ -89,7 +89,7 @@ The workflow opens a single content PR rather than publishing automatically. Ena
 Configure `ANTHROPIC_API_KEY` as an Actions secret and `ANTHROPIC_MODEL` as an Actions variable (or environment variables locally). No model is hardcoded. The pipeline still syncs release notes when AI is not configured.
 
 ```bash
-npm run updates:draft -- --baseline /tmp/saytype-releases-before.json
+npm run updates:draft -- --baseline /tmp/typealoud-releases-before.json
 ```
 
 Only added/revised release notes plus the existing curated milestones are sent to the API. The command writes review-only proposals into `content-drafts/updates.json`; it never edits published milestones. It validates source versions, existing milestone IDs, schema and coverage. Review each proposed introduction against older releases before adding a new milestone. To publish a reviewed proposal, edit `src/content/milestones.json` and its matching Chinese entries in `src/content/milestones.zh.json`, remove the consumed draft, and run the validation commands above. AI failures do not block release-note synchronization; no API call occurs when nothing changed.

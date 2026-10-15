@@ -3,7 +3,7 @@ name: Sync published release notes
 on:
   workflow_dispatch:
   repository_dispatch:
-    types: [saytype-release-notes-ready]
+    types: [typealoud-release-notes-ready]
   schedule:
     - cron: '23 6 * * *'
 
@@ -11,7 +11,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: saytype-release-content
+  group: typealoud-release-content
   cancel-in-progress: false
 
 jobs:
@@ -65,5 +65,5 @@ jobs:
           git add src/content/releases.json
           if [ -f content-drafts/updates.json ]; then git add content-drafts/updates.json; fi
           git diff --cached --quiet && exit 0
-          git commit -m "content: sync published SayType release notes"
+          git commit -m "content: sync published TypeAloud release notes"
           git push origin HEAD:main

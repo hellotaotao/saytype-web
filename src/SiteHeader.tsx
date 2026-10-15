@@ -10,7 +10,7 @@ export default function SiteHeader({ locale, page }: { locale: Locale; page: Pag
   return (
     <header className="site-header" aria-label={t('Primary navigation')}>
       <a className="site-brand" href={home} aria-label={t('TypeAloud home')}>
-        <img src="/saytype-icon.png" alt="" width="42" height="42" />
+        <img src="/typealoud-icon.png" alt="" width="42" height="42" />
         <span>TypeAloud</span>
       </a>
       <nav className="site-nav" aria-label={t('Page sections')}>

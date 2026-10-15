@@ -58,7 +58,7 @@ describe('illustrated cross-platform homepage', () => {
       const html = renderToStaticMarkup(<App locale={locale} />)
       const hero = html.match(/<section class="hero-section illustrated-hero"[\s\S]*?<\/section>/)![0]
       const platforms = html.match(/<section class="platform-section"[\s\S]*?<\/section>/)![0]
-      expect(hero).toContain('/saytype-home-hero.webp')
+      expect(hero).toContain('/typealoud-home-hero.webp')
       expect(platforms).toContain('macOS')
       expect(platforms).toContain('Windows')
       expect(platforms).toContain('Linux')

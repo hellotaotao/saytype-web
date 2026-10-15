@@ -95,7 +95,7 @@ function HeroSection({ locale }: { locale: Locale }) {
           <p className="hero-tagline">{t('Optional cloud transcription · Bring your own API key.')}</p>
         </div>
         <div className="hero-illustration-wrap" aria-hidden="true">
-          <img className="hero-illustration" src="/saytype-home-hero.webp" alt="" width="1904" height="826" />
+          <img className="hero-illustration" src="/typealoud-home-hero.webp" alt="" width="1904" height="826" />
         </div>
         <figure className="hero-product-peek">
           <DictationDemo locale={locale} />
@@ -276,7 +276,7 @@ function DownloadSection({ locale }: { locale: Locale }) {
   const t = homeCopy(locale)
   return (
     <section className="download-section" id="download" aria-labelledby="download-title">
-      <img className="download-waveform" src="/saytype-waveform.webp" loading="lazy" decoding="async" alt="" aria-hidden="true" />
+      <img className="download-waveform" src="/typealoud-waveform.webp" loading="lazy" decoding="async" alt="" aria-hidden="true" />
       <div className="download-copy reveal-target">
         <p>{t('Offline dictation. No account. No subscription.')}</p>
         <h2 id="download-title">{t('Local transcription. No cloud needed.')}</h2>
@@ -301,7 +301,7 @@ function SiteFooter({ locale }: { locale: Locale }) {
   return (
     <footer className="site-footer">
       <a className="brand-lockup" href="#top" aria-label={t('Back to top')}>
-        <img src="/saytype-icon.png" alt="" width="42" height="42" />
+        <img src="/typealoud-icon.png" alt="" width="42" height="42" />
         <span>TypeAloud</span>
       </a>
       <p>{t('Voice to text. On your device.')}</p>

@@ -24,14 +24,14 @@ describe('TypeAloud launch page', () => {
   it('uses the real brand, product, and waveform assets', () => {
     const html = renderToStaticMarkup(<App />)
 
-    expect(html).toContain('src="/saytype-icon.png"')
-    expect(html).toContain('src="/saytype-waveform.webp"')
+    expect(html).toContain('src="/typealoud-icon.png"')
+    expect(html).toContain('src="/typealoud-waveform.webp"')
   })
 
   it('uses full-scene artwork with product detail in the hero', () => {
     const html = renderToStaticMarkup(<App />)
     const hero = html.match(/<section class="hero-section illustrated-hero"[\s\S]*?<\/section>/)?.[0] ?? ''
-    expect(hero).toContain('src="/saytype-home-hero.webp"')
+    expect(hero).toContain('src="/typealoud-home-hero.webp"')
     expect(hero).toContain('width="1904" height="826"')
     expect(hero).toContain('class="hero-product-peek"')
     expect(hero).toContain('class="dictation-demo"')
@@ -43,7 +43,7 @@ describe('TypeAloud launch page', () => {
     const scenePosition = product.indexOf('class="ill apps-scene"')
     expect(scenePosition).toBeGreaterThan(-1)
     expect(product.indexOf('class="capability-list"')).toBeGreaterThan(scenePosition)
-    expect(product).not.toContain('saytype-app-settings.png')
+    expect(product).not.toContain('typealoud-app-settings.png')
   })
 
   it('has no layout preview controls', () => {
